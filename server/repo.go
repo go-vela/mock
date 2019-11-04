@@ -10,9 +10,9 @@ import (
 	"net/http"
 	"strings"
 
+	"github.com/gin-gonic/gin"
 	"github.com/go-vela/types"
 	"github.com/go-vela/types/library"
-	"github.com/gin-gonic/gin"
 )
 
 const (
