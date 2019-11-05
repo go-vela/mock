@@ -9,12 +9,13 @@ jobs:
     container:
       image: golang:latest
     steps:
-
     - name: clone
       uses: actions/checkout@v1  
             
-    - name: Calc coverage 
+    - name: download coveralls 
       run: |
+        go get github.com/mattn/goveralls
+        go get github.com/go-playground/overalls
         go test -v -covermode=count -coverprofile=coverage.out
         
     - name: Convert coverage to lcov
