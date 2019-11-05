@@ -20,4 +20,4 @@ jobs:
     - name: Coveralls
       run: |
         go test -cover -coverprofile coverage.out ./...
-        $HOME/gopath/bin/goveralls -coverprofile=coverage.out -service=actions -repotoken 
+        $GOPATH/bin/goveralls -coverprofile=coverage.out -service=actions -repotoken 
