@@ -15,7 +15,6 @@ jobs:
             
     - name: Calc coverage 
       run: |
-        export PATH=$PATH:$(go env GOPATH)/bin   
         go test -v -covermode=count -coverprofile=coverage.out
         
     - name: Convert coverage to lcov
