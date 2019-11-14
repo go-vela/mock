@@ -28,7 +28,7 @@ const (
 		"exit_code": 0,
 		"created": 1563475419,
 		"started": 1563475420,
-		"finished": 1563475421,
+		"finished": 1563475421
 	}`
 
 	// ServicesResp represents a JSON return for one to many services.
@@ -44,7 +44,7 @@ const (
 			"exit_code": 0,
 			"created": 1563475419,
 			"started": 1563475420,
-			"finished": 1563475421,
+			"finished": 1563475421
 		},
 		{
 			"id": 1,
@@ -57,7 +57,7 @@ const (
 			"exit_code": 0,
 			"created": 1563475419,
 			"started": 1563475420,
-			"finished": 1563475421,
+			"finished": 1563475421
 		}   
 	]`
 )
