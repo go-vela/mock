@@ -17,7 +17,7 @@ import (
 
 const (
 	// BuildResp represents a JSON return for a single build.
-	BuildResp = `  
+	BuildResp = `
 	{
 		"id": 1,
 		"repo_id": 1,
@@ -38,6 +38,8 @@ const (
 		"commit": "48afb5bdc41ad69bf22588491333f7cf71135163",
 		"sender": "OctoKitty",
 		"author": "OctoKitty",
+		"email": "octokitty@github.com",
+		"link": "https://vela.example.company.com/github/octocat/1",
 		"branch": "master",
 		"ref": "refs/heads/master",
 		"base_ref": "",
@@ -68,6 +70,8 @@ const (
 			"commit": "48afb5bdc41ad69bf22588491333f7cf71135163",
 			"sender": "OctoKitty",
 			"author": "OctoKitty",
+			"email": "octokitty@github.com",
+			"link": "https://vela.example.company.com/github/octocat/1",
 			"branch": "master",
 			"ref": "refs/heads/master",
 			"base_ref": "",
@@ -95,6 +99,8 @@ const (
 			"commit": "48afb5bdc41ad69bf22588491333f7cf71135163",
 			"sender": "OctoKitty",
 			"author": "OctoKitty",
+			"email": "octokitty@github.com",
+			"link": "https://vela.example.company.com/github/octocat/1",
 			"branch": "master",
 			"ref": "refs/heads/master",
 			"base_ref": "",
