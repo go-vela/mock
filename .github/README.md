@@ -2,7 +2,7 @@
 
 [![GoDoc](https://godoc.org/github.com/go-vela/mock?status.svg)](https://godoc.org/github.com/go-vela/mock)
 [![Go Report Card](https://goreportcard.com/badge/go-vela/mock)](https://goreportcard.com/report/go-vela/mock)
-[![Coverage Status](https://coveralls.io/repos/github/go-vela/mock/badge.svg?branch=master)](https://coveralls.io/github/go-vela/mock?branch=master)
+[![codecov](https://codecov.io/gh/go-vela/mock/branch/master/graph/badge.svg)](https://codecov.io/gh/go-vela/mock)
 
 > Vela is in active development and is a pre-release product. Please use at your own risk in production.
 >
