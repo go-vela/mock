@@ -65,6 +65,7 @@ const (
 // getServices returns mock JSON for a http GET.
 func getServices(c *gin.Context) {
 	data := []byte(ServicesResp)
+
 	var body []library.Service
 	_ = json.Unmarshal(data, &body)
 
@@ -79,11 +80,14 @@ func getService(c *gin.Context) {
 
 	if strings.EqualFold(s, "0") {
 		msg := fmt.Sprintf("Service %s does not exist", s)
+
 		c.AbortWithStatusJSON(404, types.Error{Message: &msg})
+
 		return
 	}
 
 	data := []byte(ServiceResp)
+
 	var body library.Service
 	_ = json.Unmarshal(data, &body)
 
@@ -93,6 +97,7 @@ func getService(c *gin.Context) {
 // addService returns mock JSON for a http POST.
 func addService(c *gin.Context) {
 	data := []byte(ServiceResp)
+
 	var body library.Service
 	_ = json.Unmarshal(data, &body)
 
@@ -107,11 +112,14 @@ func updateService(c *gin.Context) {
 
 	if strings.EqualFold(s, "0") {
 		msg := fmt.Sprintf("Service %s does not exist", s)
+
 		c.AbortWithStatusJSON(404, types.Error{Message: &msg})
+
 		return
 	}
 
 	data := []byte(ServiceResp)
+
 	var body library.Service
 	_ = json.Unmarshal(data, &body)
 
@@ -126,7 +134,9 @@ func removeService(c *gin.Context) {
 
 	if strings.EqualFold(s, "0") {
 		msg := fmt.Sprintf("Service %s does not exist", s)
+
 		c.AbortWithStatusJSON(404, types.Error{Message: &msg})
+
 		return
 	}
 

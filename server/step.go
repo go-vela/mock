@@ -74,6 +74,7 @@ const (
 // getSteps returns mock JSON for a http GET.
 func getSteps(c *gin.Context) {
 	data := []byte(StepsResp)
+
 	var body []library.Step
 	_ = json.Unmarshal(data, &body)
 
@@ -88,11 +89,14 @@ func getStep(c *gin.Context) {
 
 	if strings.EqualFold(s, "0") {
 		msg := fmt.Sprintf("Step %s does not exist", s)
+
 		c.AbortWithStatusJSON(404, types.Error{Message: &msg})
+
 		return
 	}
 
 	data := []byte(StepResp)
+
 	var body library.Step
 	_ = json.Unmarshal(data, &body)
 
@@ -102,6 +106,7 @@ func getStep(c *gin.Context) {
 // addStep returns mock JSON for a http POST.
 func addStep(c *gin.Context) {
 	data := []byte(StepResp)
+
 	var body library.Step
 	_ = json.Unmarshal(data, &body)
 
@@ -116,11 +121,14 @@ func updateStep(c *gin.Context) {
 
 	if strings.EqualFold(s, "0") {
 		msg := fmt.Sprintf("Step %s does not exist", s)
+
 		c.AbortWithStatusJSON(404, types.Error{Message: &msg})
+
 		return
 	}
 
 	data := []byte(StepResp)
+
 	var body library.Step
 	_ = json.Unmarshal(data, &body)
 
@@ -135,7 +143,9 @@ func removeStep(c *gin.Context) {
 
 	if strings.EqualFold(s, "0") {
 		msg := fmt.Sprintf("Step %s does not exist", s)
+
 		c.AbortWithStatusJSON(404, types.Error{Message: &msg})
+
 		return
 	}
 

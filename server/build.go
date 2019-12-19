@@ -131,8 +131,8 @@ const (
 
 // getBuilds returns mock JSON for a http GET.
 func getBuilds(c *gin.Context) {
-
 	data := []byte(BuildsResp)
+
 	var body []library.Build
 	_ = json.Unmarshal(data, &body)
 
@@ -145,11 +145,14 @@ func getBuild(c *gin.Context) {
 
 	if strings.EqualFold(b, "0") {
 		msg := fmt.Sprintf("Build %s does not exist", b)
+
 		c.AbortWithStatusJSON(404, types.Error{Message: &msg})
+
 		return
 	}
 
 	data := []byte(BuildResp)
+
 	var body library.Build
 	_ = json.Unmarshal(data, &body)
 
@@ -164,11 +167,14 @@ func getLogs(c *gin.Context) {
 
 	if strings.EqualFold(b, "0") {
 		msg := fmt.Sprintf("Build %s does not exist", b)
+
 		c.AbortWithStatusJSON(404, types.Error{Message: &msg})
+
 		return
 	}
 
 	data := []byte(BuildLogsResp)
+
 	var body []library.Log
 	_ = json.Unmarshal(data, &body)
 
@@ -178,6 +184,7 @@ func getLogs(c *gin.Context) {
 // addBuild returns mock JSON for a http POST.
 func addBuild(c *gin.Context) {
 	data := []byte(BuildResp)
+
 	var body library.Build
 	_ = json.Unmarshal(data, &body)
 
@@ -192,11 +199,14 @@ func updateBuild(c *gin.Context) {
 
 	if strings.EqualFold(b, "0") {
 		msg := fmt.Sprintf("Build %s does not exist", b)
+
 		c.AbortWithStatusJSON(404, types.Error{Message: &msg})
+
 		return
 	}
 
 	data := []byte(BuildResp)
+
 	var body library.Build
 	_ = json.Unmarshal(data, &body)
 
@@ -211,7 +221,9 @@ func removeBuild(c *gin.Context) {
 
 	if strings.EqualFold(b, "0") {
 		msg := fmt.Sprintf("Build %s does not exist", b)
+
 		c.AbortWithStatusJSON(404, types.Error{Message: &msg})
+
 		return
 	}
 
@@ -226,11 +238,14 @@ func restartBuild(c *gin.Context) {
 
 	if strings.EqualFold(b, "0") {
 		msg := fmt.Sprintf("Build %s does not exist", b)
+
 		c.AbortWithStatusJSON(404, types.Error{Message: &msg})
+
 		return
 	}
 
 	data := []byte(BuildResp)
+
 	var body library.Build
 	_ = json.Unmarshal(data, &body)
 

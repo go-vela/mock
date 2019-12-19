@@ -83,6 +83,7 @@ const (
 // getRepos returns mock JSON for a http GET.
 func getRepos(c *gin.Context) {
 	data := []byte(ReposResp)
+
 	var body []library.Repo
 	_ = json.Unmarshal(data, &body)
 
@@ -97,11 +98,14 @@ func getRepo(c *gin.Context) {
 
 	if strings.Contains(r, "not-found") {
 		msg := fmt.Sprintf("Repo %s does not exist", r)
+
 		c.AbortWithStatusJSON(404, types.Error{Message: &msg})
+
 		return
 	}
 
 	data := []byte(RepoResp)
+
 	var body library.Repo
 	_ = json.Unmarshal(data, &body)
 
@@ -111,6 +115,7 @@ func getRepo(c *gin.Context) {
 // addRepo returns mock JSON for a http POST.
 func addRepo(c *gin.Context) {
 	data := []byte(RepoResp)
+
 	var body library.Repo
 	_ = json.Unmarshal(data, &body)
 
@@ -125,11 +130,14 @@ func updateRepo(c *gin.Context) {
 
 	if strings.Contains(r, "not-found") {
 		msg := fmt.Sprintf("Repo %s does not exist", r)
+
 		c.AbortWithStatusJSON(404, types.Error{Message: &msg})
+
 		return
 	}
 
 	data := []byte(RepoResp)
+
 	var body library.Repo
 	_ = json.Unmarshal(data, &body)
 
@@ -144,7 +152,9 @@ func removeRepo(c *gin.Context) {
 
 	if strings.Contains(r, "not-found") {
 		msg := fmt.Sprintf("Repo %s does not exist", r)
+
 		c.AbortWithStatusJSON(404, types.Error{Message: &msg})
+
 		return
 	}
 
@@ -159,7 +169,9 @@ func repairRepo(c *gin.Context) {
 
 	if strings.Contains(r, "not-found") {
 		msg := fmt.Sprintf("Repo %s does not exist", r)
+
 		c.AbortWithStatusJSON(404, types.Error{Message: &msg})
+
 		return
 	}
 
@@ -174,7 +186,9 @@ func chownRepo(c *gin.Context) {
 
 	if strings.Contains(r, "not-found") {
 		msg := fmt.Sprintf("Repo %s does not exist", r)
+
 		c.AbortWithStatusJSON(404, types.Error{Message: &msg})
+
 		return
 	}
 

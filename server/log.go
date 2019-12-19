@@ -35,11 +35,14 @@ func getServiceLog(c *gin.Context) {
 
 	if strings.EqualFold(s, "0") {
 		msg := fmt.Sprintf("Log %s does not exist", s)
+
 		c.AbortWithStatusJSON(404, types.Error{Message: &msg})
+
 		return
 	}
 
 	data := []byte(LogResp)
+
 	var body library.Log
 	_ = json.Unmarshal(data, &body)
 
@@ -49,6 +52,7 @@ func getServiceLog(c *gin.Context) {
 // addServiceLog returns mock JSON for a http GET.
 func addServiceLog(c *gin.Context) {
 	data := []byte(LogResp)
+
 	var body library.Log
 	_ = json.Unmarshal(data, &body)
 
@@ -63,11 +67,14 @@ func updateServiceLog(c *gin.Context) {
 
 	if strings.EqualFold(s, "0") {
 		msg := fmt.Sprintf("Log %s does not exist", s)
+
 		c.AbortWithStatusJSON(404, types.Error{Message: &msg})
+
 		return
 	}
 
 	data := []byte(LogResp)
+
 	var body library.Log
 	_ = json.Unmarshal(data, &body)
 
@@ -82,7 +89,9 @@ func removeServiceLog(c *gin.Context) {
 
 	if strings.EqualFold(s, "0") {
 		msg := fmt.Sprintf("Log %s does not exist", s)
+
 		c.AbortWithStatusJSON(404, types.Error{Message: &msg})
+
 		return
 	}
 
@@ -97,11 +106,14 @@ func getStepLog(c *gin.Context) {
 
 	if strings.EqualFold(s, "0") {
 		msg := fmt.Sprintf("Log %s does not exist", s)
+
 		c.AbortWithStatusJSON(404, types.Error{Message: &msg})
+
 		return
 	}
 
 	data := []byte(LogResp)
+
 	var body library.Log
 	_ = json.Unmarshal(data, &body)
 
@@ -111,6 +123,7 @@ func getStepLog(c *gin.Context) {
 // addStepLog returns mock JSON for a http GET.
 func addStepLog(c *gin.Context) {
 	data := []byte(LogResp)
+
 	var body library.Log
 	_ = json.Unmarshal(data, &body)
 
@@ -125,11 +138,14 @@ func updateStepLog(c *gin.Context) {
 
 	if strings.EqualFold(s, "0") {
 		msg := fmt.Sprintf("Log %s does not exist", s)
+
 		c.AbortWithStatusJSON(404, types.Error{Message: &msg})
+
 		return
 	}
 
 	data := []byte(LogResp)
+
 	var body library.Log
 	_ = json.Unmarshal(data, &body)
 
@@ -144,7 +160,9 @@ func removeStepLog(c *gin.Context) {
 
 	if strings.EqualFold(s, "0") {
 		msg := fmt.Sprintf("Log %s does not exist", s)
+
 		c.AbortWithStatusJSON(404, types.Error{Message: &msg})
+
 		return
 	}
 

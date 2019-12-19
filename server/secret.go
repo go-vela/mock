@@ -86,6 +86,7 @@ const (
 // getSecrets returns mock JSON for a http GET.
 func getSecrets(c *gin.Context) {
 	data := []byte(SecretsResp)
+
 	var body []library.Secret
 	_ = json.Unmarshal(data, &body)
 
@@ -100,11 +101,14 @@ func getSecret(c *gin.Context) {
 
 	if strings.Contains(n, "not-found") {
 		msg := fmt.Sprintf("Secret %s does not exist", n)
+
 		c.AbortWithStatusJSON(404, types.Error{Message: &msg})
+
 		return
 	}
 
 	data := []byte(SecretResp)
+
 	var body library.Secret
 	_ = json.Unmarshal(data, &body)
 
@@ -114,6 +118,7 @@ func getSecret(c *gin.Context) {
 // addSecret returns mock JSON for a http POST.
 func addSecret(c *gin.Context) {
 	data := []byte(SecretResp)
+
 	var body library.Secret
 	_ = json.Unmarshal(data, &body)
 
@@ -128,11 +133,14 @@ func updateSecret(c *gin.Context) {
 
 	if strings.Contains(n, "not-found") {
 		msg := fmt.Sprintf("Repo or team %s does not exist for secret", n)
+
 		c.AbortWithStatusJSON(404, types.Error{Message: &msg})
+
 		return
 	}
 
 	data := []byte(SecretResp)
+
 	var body library.Secret
 	_ = json.Unmarshal(data, &body)
 
@@ -147,7 +155,9 @@ func removeSecret(c *gin.Context) {
 
 	if strings.Contains(n, "not-found") {
 		msg := fmt.Sprintf("Secret %s does not exist", n)
+
 		c.AbortWithStatusJSON(404, types.Error{Message: &msg})
+
 		return
 	}
 
