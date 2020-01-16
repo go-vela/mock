@@ -21,6 +21,11 @@
 
 # End of https://www.gitignore.io/api/go
 
-release/*
-coverage.out
-secrets.env
+# IntelliJ project folder
+.idea/
+
+# IntelliJ project files
+*.iml
+*.ipr
+*.iws
+*.xml
