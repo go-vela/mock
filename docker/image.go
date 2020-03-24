@@ -28,6 +28,19 @@ type ImageService struct{}
 // https://pkg.go.dev/github.com/docker/docker/client?tab=doc#ImageAPIClient
 var _ client.ImageAPIClient = (*ImageService)(nil)
 
+// BuildCachePrune is a helper function to simulate
+// a mocked call to prune the build cache for the
+// Docker daemon.
+func (i *ImageService) BuildCachePrune(ctx context.Context, opts types.BuildCachePruneOptions) (*types.BuildCachePruneReport, error) {
+	return nil, nil
+}
+
+// BuildCancel is a helper function to simulate
+// a mocked call to cancel building a Docker image.
+func (i *ImageService) BuildCancel(ctx context.Context, id string) error {
+	return nil
+}
+
 // ImageBuild is a helper function to simulate
 // a mocked call to build a Docker image.
 //
