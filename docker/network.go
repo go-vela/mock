@@ -6,11 +6,15 @@ package docker
 
 import (
 	"context"
+	"encoding/json"
+	"errors"
+	"time"
 
 	"github.com/docker/docker/api/types"
 	"github.com/docker/docker/api/types/filters"
 	"github.com/docker/docker/api/types/network"
 	"github.com/docker/docker/client"
+	"github.com/docker/docker/pkg/stringid"
 )
 
 // NetworkService implements all the network
@@ -39,7 +43,17 @@ func (n *NetworkService) NetworkConnect(ctx context.Context, network, container 
 //
 // https://pkg.go.dev/github.com/docker/docker/client?tab=doc#Client.NetworkCreate
 func (n *NetworkService) NetworkCreate(ctx context.Context, name string, options types.NetworkCreate) (types.NetworkCreateResponse, error) {
-	return types.NetworkCreateResponse{}, nil
+	// verify a network was provided
+	if len(name) == 0 {
+		return types.NetworkCreateResponse{}, errors.New("no network provided")
+	}
+
+	// create response object to return
+	response := types.NetworkCreateResponse{
+		ID: stringid.GenerateRandomID(),
+	}
+
+	return response, nil
 }
 
 // NetworkDisconnect is a helper function to simulate
@@ -55,7 +69,25 @@ func (n *NetworkService) NetworkDisconnect(ctx context.Context, network, contain
 //
 // https://pkg.go.dev/github.com/docker/docker/client?tab=doc#Client.NetworkInspect
 func (n *NetworkService) NetworkInspect(ctx context.Context, network string, options types.NetworkInspectOptions) (types.NetworkResource, error) {
-	return types.NetworkResource{}, nil
+	// verify a network was provided
+	if len(network) == 0 {
+		return types.NetworkResource{}, errors.New("no network provided")
+	}
+
+	// create response object to return
+	response := types.NetworkResource{
+		Attachable: false,
+		ConfigOnly: false,
+		Created:    time.Now(),
+		Driver:     "host",
+		ID:         stringid.GenerateRandomID(),
+		Ingress:    false,
+		Internal:   false,
+		Name:       network,
+		Scope:      "local",
+	}
+
+	return response, nil
 }
 
 // NetworkInspectWithRaw is a helper function to simulate
@@ -64,7 +96,31 @@ func (n *NetworkService) NetworkInspect(ctx context.Context, network string, opt
 //
 // https://pkg.go.dev/github.com/docker/docker/client?tab=doc#Client.NetworkInspectWithRaw
 func (n *NetworkService) NetworkInspectWithRaw(ctx context.Context, network string, options types.NetworkInspectOptions) (types.NetworkResource, []byte, error) {
-	return types.NetworkResource{}, nil, nil
+	// verify a network was provided
+	if len(network) == 0 {
+		return types.NetworkResource{}, nil, errors.New("no network provided")
+	}
+
+	// create response object to return
+	response := types.NetworkResource{
+		Attachable: false,
+		ConfigOnly: false,
+		Created:    time.Now(),
+		Driver:     "host",
+		ID:         stringid.GenerateRandomID(),
+		Ingress:    false,
+		Internal:   false,
+		Name:       network,
+		Scope:      "local",
+	}
+
+	// marshal response into raw bytes
+	b, err := json.Marshal(response)
+	if err != nil {
+		return types.NetworkResource{}, nil, err
+	}
+
+	return response, b, nil
 }
 
 // NetworkList is a helper function to simulate
@@ -80,6 +136,11 @@ func (n *NetworkService) NetworkList(ctx context.Context, options types.NetworkL
 //
 // https://pkg.go.dev/github.com/docker/docker/client?tab=doc#Client.NetworkRemove
 func (n *NetworkService) NetworkRemove(ctx context.Context, network string) error {
+	// verify a network was provided
+	if len(network) == 0 {
+		return errors.New("no network provided")
+	}
+
 	return nil
 }
 
