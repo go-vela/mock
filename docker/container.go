@@ -5,8 +5,12 @@
 package docker
 
 import (
+	"bytes"
 	"context"
+	"encoding/json"
+	"errors"
 	"io"
+	"io/ioutil"
 	"time"
 
 	"github.com/docker/docker/api/types"
@@ -14,6 +18,7 @@ import (
 	"github.com/docker/docker/api/types/filters"
 	"github.com/docker/docker/api/types/network"
 	"github.com/docker/docker/client"
+	"github.com/docker/docker/pkg/stringid"
 )
 
 // ContainerService implements all the container
@@ -51,7 +56,17 @@ func (c *ContainerService) ContainerCommit(ctx context.Context, ctn string, opti
 //
 // https://pkg.go.dev/github.com/docker/docker/client?tab=doc#Client.ContainerCreate
 func (c *ContainerService) ContainerCreate(ctx context.Context, config *container.Config, hostConfig *container.HostConfig, networkingConfig *network.NetworkingConfig, containerName string) (container.ContainerCreateCreatedBody, error) {
-	return container.ContainerCreateCreatedBody{}, nil
+	// verify a container was provided
+	if len(containerName) == 0 {
+		return container.ContainerCreateCreatedBody{}, errors.New("no container provided")
+	}
+
+	// create response object to return
+	response := container.ContainerCreateCreatedBody{
+		ID: stringid.GenerateRandomID(),
+	}
+
+	return response, nil
 }
 
 // ContainerDiff is a helper function to simulate
@@ -122,7 +137,25 @@ func (c *ContainerService) ContainerExport(ctx context.Context, ctn string) (io.
 //
 // https://pkg.go.dev/github.com/docker/docker/client?tab=doc#Client.ContainerInspect
 func (c *ContainerService) ContainerInspect(ctx context.Context, ctn string) (types.ContainerJSON, error) {
-	return types.ContainerJSON{}, nil
+	// verify a container was provided
+	if len(ctn) == 0 {
+		return types.ContainerJSON{}, errors.New("no container provided")
+	}
+
+	// create response object to return
+	response := types.ContainerJSON{
+		ContainerJSONBase: &types.ContainerJSONBase{
+			ID:    stringid.GenerateRandomID(),
+			Image: "alpine:latest",
+			Name:  ctn,
+			State: &types.ContainerState{Running: true},
+		},
+		Config: &container.Config{
+			Image: "alpine:latest",
+		},
+	}
+
+	return response, nil
 }
 
 // ContainerInspectWithRaw is a helper function to simulate
@@ -131,14 +164,43 @@ func (c *ContainerService) ContainerInspect(ctx context.Context, ctn string) (ty
 //
 // https://pkg.go.dev/github.com/docker/docker/client?tab=doc#Client.ContainerInspectWithRaw
 func (c *ContainerService) ContainerInspectWithRaw(ctx context.Context, ctn string, getSize bool) (types.ContainerJSON, []byte, error) {
-	return types.ContainerJSON{}, nil, nil
+	// verify a container was provided
+	if len(ctn) == 0 {
+		return types.ContainerJSON{}, nil, errors.New("no container provided")
+	}
+
+	// create response object to return
+	response := types.ContainerJSON{
+		ContainerJSONBase: &types.ContainerJSONBase{
+			ID:    stringid.GenerateRandomID(),
+			Image: "alpine:latest",
+			Name:  ctn,
+			State: &types.ContainerState{Running: true},
+		},
+		Config: &container.Config{
+			Image: "alpine:latest",
+		},
+	}
+
+	// marshal response into raw bytes
+	b, err := json.Marshal(response)
+	if err != nil {
+		return types.ContainerJSON{}, nil, err
+	}
+
+	return response, b, nil
 }
 
 // ContainerKill is a helper function to simulate
 // a mocked call to kill a Docker container.
 //
 // https://pkg.go.dev/github.com/docker/docker/client?tab=doc#Client.ContainerKill
-func (c *ContainerService) ContainerKill(ctx context.Context, container, signal string) error {
+func (c *ContainerService) ContainerKill(ctx context.Context, ctn, signal string) error {
+	// verify a container was provided
+	if len(ctn) == 0 {
+		return errors.New("no container provided")
+	}
+
 	return nil
 }
 
@@ -156,7 +218,19 @@ func (c *ContainerService) ContainerList(ctx context.Context, options types.Cont
 //
 // https://pkg.go.dev/github.com/docker/docker/client?tab=doc#Client.ContainerLogs
 func (c *ContainerService) ContainerLogs(ctx context.Context, ctn string, options types.ContainerLogsOptions) (io.ReadCloser, error) {
-	return nil, nil
+	// verify a container was provided
+	if len(ctn) == 0 {
+		return nil, errors.New("no container provided")
+	}
+
+	// create response object to return
+	response := ioutil.NopCloser(
+		bytes.NewReader(
+			[]byte("hello from github.com/go-vela/mock/docker"),
+		),
+	)
+
+	return response, nil
 }
 
 // ContainerPause is a helper function to simulate
@@ -172,6 +246,11 @@ func (c *ContainerService) ContainerPause(ctx context.Context, ctn string) error
 //
 // https://pkg.go.dev/github.com/docker/docker/client?tab=doc#Client.ContainerRemove
 func (c *ContainerService) ContainerRemove(ctx context.Context, ctn string, options types.ContainerRemoveOptions) error {
+	// verify a container was provided
+	if len(ctn) == 0 {
+		return errors.New("no container provided")
+	}
+
 	return nil
 }
 
@@ -204,6 +283,11 @@ func (c *ContainerService) ContainerRestart(ctx context.Context, ctn string, tim
 //
 // https://pkg.go.dev/github.com/docker/docker/client?tab=doc#Client.ContainerStart
 func (c *ContainerService) ContainerStart(ctx context.Context, ctn string, options types.ContainerStartOptions) error {
+	// verify a container was provided
+	if len(ctn) == 0 {
+		return errors.New("no container provided")
+	}
+
 	return nil
 }
 
@@ -230,6 +314,11 @@ func (c *ContainerService) ContainerStats(ctx context.Context, ctn string, strea
 //
 // https://pkg.go.dev/github.com/docker/docker/client?tab=doc#Client.ContainerStop
 func (c *ContainerService) ContainerStop(ctx context.Context, ctn string, timeout *time.Duration) error {
+	// verify a container was provided
+	if len(ctn) == 0 {
+		return errors.New("no container provided")
+	}
+
 	return nil
 }
 
@@ -264,7 +353,28 @@ func (c *ContainerService) ContainerUpdate(ctx context.Context, ctn string, upda
 //
 // https://pkg.go.dev/github.com/docker/docker/client?tab=doc#Client.ContainerWait
 func (c *ContainerService) ContainerWait(ctx context.Context, ctn string, condition container.WaitCondition) (<-chan container.ContainerWaitOKBody, <-chan error) {
-	return nil, nil
+	ctnCh := make(chan container.ContainerWaitOKBody)
+	errCh := make(chan error)
+
+	// verify a container was provided
+	if len(ctn) == 0 {
+		errCh <- errors.New("no container provided")
+		return ctnCh, errCh
+	}
+
+	// create response object to return
+	response := container.ContainerWaitOKBody{
+		Error:      nil,
+		StatusCode: 0,
+	}
+
+	go func() {
+		time.Sleep(3 * time.Second)
+
+		ctnCh <- response
+	}()
+
+	return ctnCh, errCh
 }
 
 // ContainersPrune is a helper function to simulate
