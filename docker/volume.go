@@ -6,11 +6,16 @@ package docker
 
 import (
 	"context"
+	"encoding/json"
+	"errors"
+	"fmt"
+	"time"
 
 	"github.com/docker/docker/api/types"
 	"github.com/docker/docker/api/types/filters"
 	"github.com/docker/docker/api/types/volume"
 	"github.com/docker/docker/client"
+	"github.com/docker/docker/pkg/stringid"
 )
 
 // VolumeService implements all the volume
@@ -31,7 +36,23 @@ var _ client.VolumeAPIClient = (*VolumeService)(nil)
 //
 // https://pkg.go.dev/github.com/docker/docker/client?tab=doc#Client.VolumeCreate
 func (v *VolumeService) VolumeCreate(ctx context.Context, options volume.VolumeCreateBody) (types.Volume, error) {
-	return types.Volume{}, nil
+	// verify a volume was provided
+	if len(options.Name) == 0 {
+		return types.Volume{}, errors.New("no volume provided")
+	}
+
+	// create response object to return
+	response := types.Volume{
+		CreatedAt:  time.Now().String(),
+		Driver:     options.Driver,
+		Labels:     options.Labels,
+		Mountpoint: fmt.Sprintf("/var/lib/docker/volumes/%s/_data", stringid.GenerateRandomID()),
+		Name:       options.Name,
+		Options:    options.DriverOpts,
+		Scope:      "local",
+	}
+
+	return response, nil
 }
 
 // VolumeInspect is a helper function to simulate
@@ -39,7 +60,21 @@ func (v *VolumeService) VolumeCreate(ctx context.Context, options volume.VolumeC
 //
 // https://pkg.go.dev/github.com/docker/docker/client?tab=doc#Client.VolumeInspect
 func (v *VolumeService) VolumeInspect(ctx context.Context, volumeID string) (types.Volume, error) {
-	return types.Volume{}, nil
+	// verify a volume was provided
+	if len(volumeID) == 0 {
+		return types.Volume{}, errors.New("no volume provided")
+	}
+
+	// create response object to return
+	response := types.Volume{
+		CreatedAt:  time.Now().String(),
+		Driver:     "local",
+		Mountpoint: fmt.Sprintf("/var/lib/docker/volumes/%s/_data", stringid.GenerateRandomID()),
+		Name:       volumeID,
+		Scope:      "local",
+	}
+
+	return response, nil
 }
 
 // VolumeInspectWithRaw is a helper function to simulate
@@ -48,7 +83,27 @@ func (v *VolumeService) VolumeInspect(ctx context.Context, volumeID string) (typ
 //
 // https://pkg.go.dev/github.com/docker/docker/client?tab=doc#Client.VolumeInspectWithRaw
 func (v *VolumeService) VolumeInspectWithRaw(ctx context.Context, volumeID string) (types.Volume, []byte, error) {
-	return types.Volume{}, nil, nil
+	// verify a volume was provided
+	if len(volumeID) == 0 {
+		return types.Volume{}, nil, errors.New("no volume provided")
+	}
+
+	// create response object to return
+	response := types.Volume{
+		CreatedAt:  time.Now().String(),
+		Driver:     "local",
+		Mountpoint: fmt.Sprintf("/var/lib/docker/volumes/%s/_data", stringid.GenerateRandomID()),
+		Name:       volumeID,
+		Scope:      "local",
+	}
+
+	// marshal response into raw bytes
+	b, err := json.Marshal(response)
+	if err != nil {
+		return types.Volume{}, nil, err
+	}
+
+	return response, b, nil
 }
 
 // VolumeList is a helper function to simulate
@@ -64,6 +119,11 @@ func (v *VolumeService) VolumeList(ctx context.Context, filter filters.Args) (vo
 //
 // https://pkg.go.dev/github.com/docker/docker/client?tab=doc#Client.VolumeRemove
 func (v *VolumeService) VolumeRemove(ctx context.Context, volumeID string, force bool) error {
+	// verify a volume was provided
+	if len(volumeID) == 0 {
+		return errors.New("no volume provided")
+	}
+
 	return nil
 }
 
