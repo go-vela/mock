@@ -356,6 +356,12 @@ func (c *ContainerService) ContainerWait(ctx context.Context, ctn string, condit
 	ctnCh := make(chan container.ContainerWaitOKBody)
 	errCh := make(chan error)
 
+	// verify a container was provided
+	if len(ctn) == 0 {
+		errCh <- errors.New("no container provided")
+		return ctnCh, errCh
+	}
+
 	// create response object to return
 	response := container.ContainerWaitOKBody{
 		Error:      nil,
