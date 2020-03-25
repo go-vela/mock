@@ -17,15 +17,6 @@ import (
 // related functions for the Docker mock.
 type ServiceService struct{}
 
-// WARNING: DO NOT REMOVE THIS UNDER ANY CIRCUMSTANCES
-//
-// This line serves as a quick and efficient way to ensure that our
-// ServiceService satisfies the ServiceAPIClient interface that
-// the Docker client expects.
-//
-// https://pkg.go.dev/github.com/docker/docker/client?tab=doc#ServiceAPIClient
-var _ client.ServiceAPIClient = (*ServiceService)(nil)
-
 // ServiceCreate is a helper function to simulate
 // a mocked call to create a service for a
 // Docker swarm cluster.
@@ -104,3 +95,12 @@ func (s *ServiceService) TaskList(ctx context.Context, options types.TaskListOpt
 func (s *ServiceService) TaskLogs(ctx context.Context, taskID string, options types.ContainerLogsOptions) (io.ReadCloser, error) {
 	return nil, nil
 }
+
+// WARNING: DO NOT REMOVE THIS UNDER ANY CIRCUMSTANCES
+//
+// This line serves as a quick and efficient way to ensure that our
+// ServiceService satisfies the ServiceAPIClient interface that
+// the Docker client expects.
+//
+// https://pkg.go.dev/github.com/docker/docker/client?tab=doc#ServiceAPIClient
+var _ client.ServiceAPIClient = (*ServiceService)(nil)

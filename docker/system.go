@@ -17,15 +17,6 @@ import (
 // related functions for the Docker mock.
 type SystemService struct{}
 
-// WARNING: DO NOT REMOVE THIS UNDER ANY CIRCUMSTANCES
-//
-// This line serves as a quick and efficient way to ensure that our
-// SystemService satisfies the SystemAPIClient interface that
-// the Docker client expects.
-//
-// hhttps://pkg.go.dev/github.com/docker/docker/client?tab=doc#SystemAPIClient
-var _ client.NetworkAPIClient = (*NetworkService)(nil)
-
 // DiskUsage is a helper function to simulate
 // a mocked call to capture the data usage
 // from the Docker daemon.
@@ -70,3 +61,12 @@ func (s *SystemService) Ping(ctx context.Context) (types.Ping, error) {
 func (s *SystemService) RegistryLogin(ctx context.Context, auth types.AuthConfig) (registry.AuthenticateOKBody, error) {
 	return registry.AuthenticateOKBody{}, nil
 }
+
+// WARNING: DO NOT REMOVE THIS UNDER ANY CIRCUMSTANCES
+//
+// This line serves as a quick and efficient way to ensure that our
+// SystemService satisfies the SystemAPIClient interface that
+// the Docker client expects.
+//
+// hhttps://pkg.go.dev/github.com/docker/docker/client?tab=doc#SystemAPIClient
+var _ client.NetworkAPIClient = (*NetworkService)(nil)

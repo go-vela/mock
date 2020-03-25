@@ -16,15 +16,6 @@ import (
 // related functions for the Docker mock.
 type ConfigService struct{}
 
-// WARNING: DO NOT REMOVE THIS UNDER ANY CIRCUMSTANCES
-//
-// This line serves as a quick and efficient way to ensure that our
-// ImageService satisfies the ImageAPIClient interface that
-// the Docker client expects.
-//
-// https://pkg.go.dev/github.com/docker/docker/client?tab=doc#ConfigAPIClient
-var _ client.ConfigAPIClient = (*ConfigService)(nil)
-
 // ConfigCreate is a helper function to simulate
 // a mocked call to create a config for a
 // Docker swarm cluster.
@@ -57,3 +48,12 @@ func (c *ConfigService) ConfigRemove(ctx context.Context, id string) error { ret
 func (c *ConfigService) ConfigUpdate(ctx context.Context, id string, version swarm.Version, config swarm.ConfigSpec) error {
 	return nil
 }
+
+// WARNING: DO NOT REMOVE THIS UNDER ANY CIRCUMSTANCES
+//
+// This line serves as a quick and efficient way to ensure that our
+// ImageService satisfies the ImageAPIClient interface that
+// the Docker client expects.
+//
+// https://pkg.go.dev/github.com/docker/docker/client?tab=doc#ConfigAPIClient
+var _ client.ConfigAPIClient = (*ConfigService)(nil)

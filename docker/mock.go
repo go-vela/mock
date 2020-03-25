@@ -32,15 +32,6 @@ type mock struct {
 	Version string
 }
 
-// WARNING: DO NOT REMOVE THIS UNDER ANY CIRCUMSTANCES
-//
-// This line serves as a quick and efficient way to ensure
-// that our mock satisfies the Go interface that the
-// Docker client expects.
-//
-// https://pkg.go.dev/github.com/docker/docker/client?tab=doc#CommonAPIClient
-var _ client.CommonAPIClient = (*mock)(nil)
-
 // ClientVersion is a helper function to return
 // the version string associated with the mock.
 //
@@ -103,3 +94,12 @@ func (m *mock) NegotiateAPIVersionPing(types.Ping) {}
 func (m *mock) ServerVersion(ctx context.Context) (types.Version, error) {
 	return types.Version{}, nil
 }
+
+// WARNING: DO NOT REMOVE THIS UNDER ANY CIRCUMSTANCES
+//
+// This line serves as a quick and efficient way to ensure
+// that our mock satisfies the Go interface that the
+// Docker client expects.
+//
+// https://pkg.go.dev/github.com/docker/docker/client?tab=doc#CommonAPIClient
+var _ client.CommonAPIClient = (*mock)(nil)
