@@ -5,14 +5,21 @@
 package docker
 
 import (
+	"bytes"
 	"context"
+	"encoding/json"
+	"errors"
+	"fmt"
 	"io"
+	"io/ioutil"
+	"time"
 
 	"github.com/docker/docker/api/types"
 	"github.com/docker/docker/api/types/filters"
 	"github.com/docker/docker/api/types/image"
 	"github.com/docker/docker/api/types/registry"
 	"github.com/docker/docker/client"
+	"github.com/docker/docker/pkg/stringid"
 )
 
 // ImageService implements all the image
@@ -71,7 +78,47 @@ func (i *ImageService) ImageImport(ctx context.Context, source types.ImageImport
 //
 // https://pkg.go.dev/github.com/docker/docker/client?tab=doc#Client.ImageInspectWithRaw
 func (i *ImageService) ImageInspectWithRaw(ctx context.Context, image string) (types.ImageInspect, []byte, error) {
-	return types.ImageInspect{}, nil, nil
+	// verify an image was provided
+	if len(image) == 0 {
+		return types.ImageInspect{}, nil, errors.New("no image provided")
+	}
+
+	path := fmt.Sprintf("/var/lib/docker/overlay2/%s", stringid.GenerateRandomID())
+
+	// create response object to return
+	response := types.ImageInspect{
+		ID:            fmt.Sprintf("sha256:%s", stringid.GenerateRandomID()),
+		RepoTags:      []string{"alpine:latest"},
+		RepoDigests:   []string{fmt.Sprintf("alpine@sha256:%s", stringid.GenerateRandomID())},
+		Created:       time.Now().String(),
+		Container:     fmt.Sprintf("sha256:%s", stringid.GenerateRandomID()),
+		DockerVersion: "19.03.1-ce",
+		Architecture:  "amd64",
+		Os:            "linux",
+		Size:          5552690,
+		VirtualSize:   5552690,
+		GraphDriver: types.GraphDriverData{
+			Data: map[string]string{
+				"MergedDir": fmt.Sprintf("%s/merged", path),
+				"UpperDir":  fmt.Sprintf("%s/diff", path),
+				"WorkDir":   fmt.Sprintf("%s/work", path),
+			},
+			Name: "overlay2",
+		},
+		RootFS: types.RootFS{
+			Type:   "layers",
+			Layers: []string{fmt.Sprintf("sha256:%s", stringid.GenerateRandomID())},
+		},
+		Metadata: types.ImageMetadata{LastTagTime: time.Now()},
+	}
+
+	// marshal response into raw bytes
+	b, err := json.Marshal(response)
+	if err != nil {
+		return types.ImageInspect{}, nil, err
+	}
+
+	return response, b, nil
 }
 
 // ImageList is a helper function to simulate
@@ -95,7 +142,26 @@ func (i *ImageService) ImageLoad(ctx context.Context, input io.Reader, quiet boo
 //
 // https://pkg.go.dev/github.com/docker/docker/client?tab=doc#Client.ImagePull
 func (i *ImageService) ImagePull(ctx context.Context, ref string, options types.ImagePullOptions) (io.ReadCloser, error) {
-	return nil, nil
+	// verify an image was provided
+	if len(ref) == 0 {
+		return nil, errors.New("no container provided")
+	}
+
+	// create response object to return
+	response := ioutil.NopCloser(
+		bytes.NewReader(
+			[]byte(
+				fmt.Sprintf("%s\n%s\n%s\n%s",
+					"latest: Pulling from library/alpine",
+					fmt.Sprintf("Digest: sha256:%s", stringid.GenerateRandomID()),
+					"Status: Image is up to date for alpine:latest",
+					"docker.io/library/alpine:latest",
+				),
+			),
+		),
+	)
+
+	return response, nil
 }
 
 // ImagePush is a helper function to simulate
