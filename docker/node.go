@@ -16,15 +16,6 @@ import (
 // related functions for the Docker mock.
 type NodeService struct{}
 
-// WARNING: DO NOT REMOVE THIS UNDER ANY CIRCUMSTANCES
-//
-// This line serves as a quick and efficient way to ensure that our
-// NodeService satisfies the NodeAPIClient interface that
-// the Docker client expects.
-//
-// https://pkg.go.dev/github.com/docker/docker/client?tab=doc#NodeAPIClient
-var _ client.NodeAPIClient = (*NodeService)(nil)
-
 // NodeInspectWithRaw is a helper function to simulate
 // a mocked call to inspect a node for a Docker swarm
 // cluster and return the raw body received from the API.
@@ -60,3 +51,12 @@ func (n *NodeService) NodeRemove(ctx context.Context, nodeID string, options typ
 func (n *NodeService) NodeUpdate(ctx context.Context, nodeID string, version swarm.Version, node swarm.NodeSpec) error {
 	return nil
 }
+
+// WARNING: DO NOT REMOVE THIS UNDER ANY CIRCUMSTANCES
+//
+// This line serves as a quick and efficient way to ensure that our
+// NodeService satisfies the NodeAPIClient interface that
+// the Docker client expects.
+//
+// https://pkg.go.dev/github.com/docker/docker/client?tab=doc#NodeAPIClient
+var _ client.NodeAPIClient = (*NodeService)(nil)

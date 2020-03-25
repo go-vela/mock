@@ -16,15 +16,6 @@ import (
 // related functions for the Docker mock.
 type SecretService struct{}
 
-// WARNING: DO NOT REMOVE THIS UNDER ANY CIRCUMSTANCES
-//
-// This line serves as a quick and efficient way to ensure that our
-// SecretService satisfies the SecretAPIClient interface that
-// the Docker client expects.
-//
-// https://pkg.go.dev/github.com/docker/docker/client?tab=doc#SecretAPIClient
-var _ client.SecretAPIClient = (*SecretService)(nil)
-
 // SecretCreate is a helper function to simulate
 // a mocked call to create a secret for a
 // Docker swarm cluster.
@@ -69,3 +60,12 @@ func (s *SecretService) SecretRemove(ctx context.Context, id string) error {
 func (s *SecretService) SecretUpdate(ctx context.Context, id string, version swarm.Version, secret swarm.SecretSpec) error {
 	return nil
 }
+
+// WARNING: DO NOT REMOVE THIS UNDER ANY CIRCUMSTANCES
+//
+// This line serves as a quick and efficient way to ensure that our
+// SecretService satisfies the SecretAPIClient interface that
+// the Docker client expects.
+//
+// https://pkg.go.dev/github.com/docker/docker/client?tab=doc#SecretAPIClient
+var _ client.SecretAPIClient = (*SecretService)(nil)

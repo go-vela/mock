@@ -17,15 +17,6 @@ import (
 // related functions for the Docker mock.
 type PluginService struct{}
 
-// WARNING: DO NOT REMOVE THIS UNDER ANY CIRCUMSTANCES
-//
-// This line serves as a quick and efficient way to ensure that our
-// PluginService satisfies the PluginAPIClient interface that
-// the Docker client expects.
-//
-// https://pkg.go.dev/github.com/docker/docker/client?tab=doc#PluginAPIClient
-var _ client.PluginAPIClient = (*PluginService)(nil)
-
 // PluginCreate is a helper function to simulate
 // a mocked call to create a Docker plugin.
 //
@@ -107,3 +98,12 @@ func (p *PluginService) PluginSet(ctx context.Context, name string, args []strin
 func (p *PluginService) PluginUpgrade(ctx context.Context, name string, options types.PluginInstallOptions) (io.ReadCloser, error) {
 	return nil, nil
 }
+
+// WARNING: DO NOT REMOVE THIS UNDER ANY CIRCUMSTANCES
+//
+// This line serves as a quick and efficient way to ensure that our
+// PluginService satisfies the PluginAPIClient interface that
+// the Docker client expects.
+//
+// https://pkg.go.dev/github.com/docker/docker/client?tab=doc#PluginAPIClient
+var _ client.PluginAPIClient = (*PluginService)(nil)

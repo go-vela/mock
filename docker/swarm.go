@@ -16,15 +16,6 @@ import (
 // related functions for the Docker mock.
 type SwarmService struct{}
 
-// WARNING: DO NOT REMOVE THIS UNDER ANY CIRCUMSTANCES
-//
-// This line serves as a quick and efficient way to ensure that our
-// SwarmService satisfies the SwarmAPIClient interface that
-// the Docker client expects.
-//
-// https://pkg.go.dev/github.com/docker/docker/client?tab=doc#SwarmAPIClient
-var _ client.SwarmAPIClient = (*SwarmService)(nil)
-
 // SwarmGetUnlockKey is a helper function to simulate
 // a mocked call to capture the unlock key for a
 // Docker swarm cluster.
@@ -87,3 +78,12 @@ func (s *SwarmService) SwarmUnlock(ctx context.Context, req swarm.UnlockRequest)
 func (s *SwarmService) SwarmUpdate(ctx context.Context, version swarm.Version, swarm swarm.Spec, flags swarm.UpdateFlags) error {
 	return nil
 }
+
+// WARNING: DO NOT REMOVE THIS UNDER ANY CIRCUMSTANCES
+//
+// This line serves as a quick and efficient way to ensure that our
+// SwarmService satisfies the SwarmAPIClient interface that
+// the Docker client expects.
+//
+// https://pkg.go.dev/github.com/docker/docker/client?tab=doc#SwarmAPIClient
+var _ client.SwarmAPIClient = (*SwarmService)(nil)

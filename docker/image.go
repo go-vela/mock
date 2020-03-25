@@ -19,15 +19,6 @@ import (
 // related functions for the Docker mock.
 type ImageService struct{}
 
-// WARNING: DO NOT REMOVE THIS UNDER ANY CIRCUMSTANCES
-//
-// This line serves as a quick and efficient way to ensure that our
-// ImageService satisfies the ImageAPIClient interface that
-// the Docker client expects.
-//
-// https://pkg.go.dev/github.com/docker/docker/client?tab=doc#ImageAPIClient
-var _ client.ImageAPIClient = (*ImageService)(nil)
-
 // BuildCachePrune is a helper function to simulate
 // a mocked call to prune the build cache for the
 // Docker daemon.
@@ -154,3 +145,12 @@ func (i *ImageService) ImageTag(ctx context.Context, image, ref string) error {
 func (i *ImageService) ImagesPrune(ctx context.Context, pruneFilter filters.Args) (types.ImagesPruneReport, error) {
 	return types.ImagesPruneReport{}, nil
 }
+
+// WARNING: DO NOT REMOVE THIS UNDER ANY CIRCUMSTANCES
+//
+// This line serves as a quick and efficient way to ensure that our
+// ImageService satisfies the ImageAPIClient interface that
+// the Docker client expects.
+//
+// https://pkg.go.dev/github.com/docker/docker/client?tab=doc#ImageAPIClient
+var _ client.ImageAPIClient = (*ImageService)(nil)

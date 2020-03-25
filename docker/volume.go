@@ -20,16 +20,7 @@ import (
 
 // VolumeService implements all the volume
 // related functions for the Docker mock.
-type VolumeService struct{ client.VolumeAPIClient }
-
-// WARNING: DO NOT REMOVE THIS UNDER ANY CIRCUMSTANCES
-//
-// This line serves as a quick and efficient way to ensure that our
-// VolumeService satisfies the VolumeAPIClient interface that
-// the Docker client expects.
-//
-// https://pkg.go.dev/github.com/docker/docker/client?tab=doc#VolumeAPIClient
-var _ client.VolumeAPIClient = (*VolumeService)(nil)
+type VolumeService struct{}
 
 // VolumeCreate is a helper function to simulate
 // a mocked call to create a Docker volume.
@@ -134,3 +125,12 @@ func (v *VolumeService) VolumeRemove(ctx context.Context, volumeID string, force
 func (v *VolumeService) VolumesPrune(ctx context.Context, pruneFilter filters.Args) (types.VolumesPruneReport, error) {
 	return types.VolumesPruneReport{}, nil
 }
+
+// WARNING: DO NOT REMOVE THIS UNDER ANY CIRCUMSTANCES
+//
+// This line serves as a quick and efficient way to ensure that our
+// VolumeService satisfies the VolumeAPIClient interface that
+// the Docker client expects.
+//
+// https://pkg.go.dev/github.com/docker/docker/client?tab=doc#VolumeAPIClient
+var _ client.VolumeAPIClient = (*VolumeService)(nil)

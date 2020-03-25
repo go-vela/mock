@@ -21,15 +21,6 @@ import (
 // related functions for the Docker mock.
 type NetworkService struct{}
 
-// WARNING: DO NOT REMOVE THIS UNDER ANY CIRCUMSTANCES
-//
-// This line serves as a quick and efficient way to ensure that our
-// NetworkService satisfies the NetworkAPIClient interface that
-// the Docker client expects.
-//
-// https://pkg.go.dev/github.com/docker/docker/client?tab=doc#NetworkAPIClient
-var _ client.NetworkAPIClient = (*NetworkService)(nil)
-
 // NetworkConnect is a helper function to simulate
 // a mocked call to connect to a Docker network.
 //
@@ -151,3 +142,12 @@ func (n *NetworkService) NetworkRemove(ctx context.Context, network string) erro
 func (n *NetworkService) NetworksPrune(ctx context.Context, pruneFilter filters.Args) (types.NetworksPruneReport, error) {
 	return types.NetworksPruneReport{}, nil
 }
+
+// WARNING: DO NOT REMOVE THIS UNDER ANY CIRCUMSTANCES
+//
+// This line serves as a quick and efficient way to ensure that our
+// NetworkService satisfies the NetworkAPIClient interface that
+// the Docker client expects.
+//
+// https://pkg.go.dev/github.com/docker/docker/client?tab=doc#NetworkAPIClient
+var _ client.NetworkAPIClient = (*NetworkService)(nil)

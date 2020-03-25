@@ -25,15 +25,6 @@ import (
 // related functions for the Docker mock.
 type ContainerService struct{}
 
-// WARNING: DO NOT REMOVE THIS UNDER ANY CIRCUMSTANCES
-//
-// This line serves as a quick and efficient way to ensure that our
-// ContainerService satisfies the ContainerAPIClient interface that
-// the Docker client expects.
-//
-// https://pkg.go.dev/github.com/docker/docker/client?tab=doc#ContainerAPIClient
-var _ client.ContainerAPIClient = (*ContainerService)(nil)
-
 // ContainerAttach is a helper function to simulate
 // a mocked call to attach a connection to a
 // Docker container.
@@ -400,3 +391,12 @@ func (c *ContainerService) CopyFromContainer(ctx context.Context, container, src
 func (c *ContainerService) CopyToContainer(ctx context.Context, container, path string, content io.Reader, options types.CopyToContainerOptions) error {
 	return nil
 }
+
+// WARNING: DO NOT REMOVE THIS UNDER ANY CIRCUMSTANCES
+//
+// This line serves as a quick and efficient way to ensure that our
+// ContainerService satisfies the ContainerAPIClient interface that
+// the Docker client expects.
+//
+// https://pkg.go.dev/github.com/docker/docker/client?tab=doc#ContainerAPIClient
+var _ client.ContainerAPIClient = (*ContainerService)(nil)
