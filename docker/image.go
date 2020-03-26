@@ -20,6 +20,7 @@ import (
 	"github.com/docker/docker/api/types/image"
 	"github.com/docker/docker/api/types/registry"
 	"github.com/docker/docker/client"
+	"github.com/docker/docker/errdefs"
 	"github.com/docker/docker/pkg/stringid"
 )
 
@@ -88,8 +89,8 @@ func (i *ImageService) ImageInspectWithRaw(ctx context.Context, image string) (t
 	if strings.Contains(image, "notfound") || strings.Contains(image, "not-found") {
 		return types.ImageInspect{},
 			nil,
-			fmt.Errorf(
-				"Error response from daemon: manifest for %s not found: manifest unknown", image,
+			errdefs.NotFound(
+				fmt.Errorf("Error response from daemon: manifest for %s not found: manifest unknown", image),
 			)
 	}
 
@@ -151,10 +152,18 @@ func (i *ImageService) ImageLoad(ctx context.Context, input io.Reader, quiet boo
 // a mocked call to pull a Docker image.
 //
 // https://pkg.go.dev/github.com/docker/docker/client?tab=doc#Client.ImagePull
-func (i *ImageService) ImagePull(ctx context.Context, ref string, options types.ImagePullOptions) (io.ReadCloser, error) {
+func (i *ImageService) ImagePull(ctx context.Context, image string, options types.ImagePullOptions) (io.ReadCloser, error) {
 	// verify an image was provided
-	if len(ref) == 0 {
+	if len(image) == 0 {
 		return nil, errors.New("no container provided")
+	}
+
+	// check if the image is not found
+	if strings.Contains(image, "notfound") || strings.Contains(image, "not-found") {
+		return nil,
+			errdefs.NotFound(
+				fmt.Errorf("Error response from daemon: manifest for %s not found: manifest unknown", image),
+			)
 	}
 
 	// create response object to return
@@ -162,10 +171,10 @@ func (i *ImageService) ImagePull(ctx context.Context, ref string, options types.
 		bytes.NewReader(
 			[]byte(
 				fmt.Sprintf("%s\n%s\n%s\n%s\n",
-					"latest: Pulling from library/alpine",
+					fmt.Sprintf("latest: Pulling from %s", image),
 					fmt.Sprintf("Digest: sha256:%s", stringid.GenerateRandomID()),
-					"Status: Image is up to date for alpine:latest",
-					"docker.io/library/alpine:latest",
+					fmt.Sprintf("Status: Image is up to date for %s", image),
+					image,
 				),
 			),
 		),
