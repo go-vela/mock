@@ -373,7 +373,7 @@ func (c *ContainerService) ContainerWait(ctx context.Context, ctn string, condit
 	}
 
 	go func() {
-		time.Sleep(3 * time.Second)
+		time.Sleep(2 * time.Second)
 
 		ctnCh <- response
 	}()
