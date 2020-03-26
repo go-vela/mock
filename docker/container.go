@@ -18,6 +18,7 @@ import (
 	"github.com/docker/docker/api/types/filters"
 	"github.com/docker/docker/api/types/network"
 	"github.com/docker/docker/client"
+	"github.com/docker/docker/pkg/stdcopy"
 	"github.com/docker/docker/pkg/stringid"
 )
 
@@ -215,13 +216,25 @@ func (c *ContainerService) ContainerLogs(ctx context.Context, ctn string, option
 	}
 
 	// create response object to return
-	response := ioutil.NopCloser(
-		bytes.NewReader(
-			[]byte("hello from github.com/go-vela/mock/docker"),
-		),
-	)
+	response := new(bytes.Buffer)
 
-	return response, nil
+	// write stdout logs to response buffer
+	_, err := stdcopy.
+		NewStdWriter(response, stdcopy.Stdout).
+		Write([]byte("hello to stdout from github.com/go-vela/mock/docker"))
+	if err != nil {
+		return nil, err
+	}
+
+	// write stderr logs to response buffer
+	_, err = stdcopy.
+		NewStdWriter(response, stdcopy.Stderr).
+		Write([]byte("hello to stderr from github.com/go-vela/mock/docker"))
+	if err != nil {
+		return nil, err
+	}
+
+	return ioutil.NopCloser(response), nil
 }
 
 // ContainerPause is a helper function to simulate
@@ -360,7 +373,7 @@ func (c *ContainerService) ContainerWait(ctx context.Context, ctn string, condit
 	}
 
 	go func() {
-		time.Sleep(3 * time.Second)
+		time.Sleep(2 * time.Second)
 
 		ctnCh <- response
 	}()

@@ -12,6 +12,7 @@ import (
 	"fmt"
 	"io"
 	"io/ioutil"
+	"strings"
 	"time"
 
 	"github.com/docker/docker/api/types"
@@ -83,6 +84,15 @@ func (i *ImageService) ImageInspectWithRaw(ctx context.Context, image string) (t
 		return types.ImageInspect{}, nil, errors.New("no image provided")
 	}
 
+	// check if the image is not found
+	if strings.Contains(image, "notfound") || strings.Contains(image, "not-found") {
+		return types.ImageInspect{},
+			nil,
+			fmt.Errorf(
+				"Error response from daemon: manifest for %s not found: manifest unknown", image,
+			)
+	}
+
 	path := fmt.Sprintf("/var/lib/docker/overlay2/%s", stringid.GenerateRandomID())
 
 	// create response object to return
@@ -151,7 +161,7 @@ func (i *ImageService) ImagePull(ctx context.Context, ref string, options types.
 	response := ioutil.NopCloser(
 		bytes.NewReader(
 			[]byte(
-				fmt.Sprintf("%s\n%s\n%s\n%s",
+				fmt.Sprintf("%s\n%s\n%s\n%s\n",
 					"latest: Pulling from library/alpine",
 					fmt.Sprintf("Digest: sha256:%s", stringid.GenerateRandomID()),
 					"Status: Image is up to date for alpine:latest",
