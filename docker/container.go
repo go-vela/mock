@@ -416,15 +416,28 @@ func (c *ContainerService) ContainerWait(ctx context.Context, ctn string, condit
 	ctnCh := make(chan container.ContainerWaitOKBody)
 	errCh := make(chan error)
 
+	// defer closing the error channel
+	defer close(errCh)
+
 	// verify a container was provided
 	if len(ctn) == 0 {
+		// defer closing the container channel
+		defer close(ctnCh)
+
+		// propagate the error to the error channel
 		errCh <- errors.New("no container provided")
+
 		return ctnCh, errCh
 	}
 
 	// check if the container is not found
 	if strings.Contains(ctn, "notfound") || strings.Contains(ctn, "not-found") {
+		// defer closing the container channel
+		defer close(ctnCh)
+
+		// propagate the error to the error channel
 		errCh <- errdefs.NotFound(fmt.Errorf("Error: No such container: %s", ctn))
+
 		return ctnCh, errCh
 	}
 
@@ -435,8 +448,13 @@ func (c *ContainerService) ContainerWait(ctx context.Context, ctn string, condit
 	}
 
 	go func() {
-		time.Sleep(2 * time.Second)
+		// defer closing the container channel
+		defer close(ctnCh)
 
+		// sleep for 1 second to simulate waiting for the container
+		time.Sleep(1 * time.Second)
+
+		// propagate the response to the container channel
 		ctnCh <- response
 	}()
 
