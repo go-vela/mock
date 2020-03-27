@@ -57,14 +57,25 @@ func (c *ContainerService) ContainerCreate(ctx context.Context, config *containe
 			errors.New("no container provided")
 	}
 
-	// check if the container is not found
-	if strings.Contains(ctn, "notfound") || strings.Contains(ctn, "not-found") {
+	// check if the container is notfound and
+	// check if the notfound should be ignored
+	if strings.Contains(ctn, "notfound") &&
+		!strings.Contains(ctn, "ignorenotfound") {
+		return container.ContainerCreateCreatedBody{},
+			errdefs.NotFound(fmt.Errorf("Error: No such container: %s", ctn))
+	}
+
+	// check if the container is not-found and
+	// check if the not-found should be ignored
+	if strings.Contains(ctn, "not-found") &&
+		!strings.Contains(ctn, "ignore-not-found") {
 		return container.ContainerCreateCreatedBody{},
 			errdefs.NotFound(fmt.Errorf("Error: No such container: %s", ctn))
 	}
 
 	// check if the image is not found
-	if strings.Contains(config.Image, "notfound") || strings.Contains(config.Image, "not-found") {
+	if strings.Contains(config.Image, "notfound") ||
+		strings.Contains(config.Image, "not-found") {
 		return container.ContainerCreateCreatedBody{},
 			errdefs.NotFound(
 				fmt.Errorf("Error response from daemon: manifest for %s not found: manifest unknown", config.Image),
@@ -152,8 +163,18 @@ func (c *ContainerService) ContainerInspect(ctx context.Context, ctn string) (ty
 		return types.ContainerJSON{}, errors.New("no container provided")
 	}
 
-	// check if the container is not found
-	if strings.Contains(ctn, "notfound") || strings.Contains(ctn, "not-found") {
+	// check if the container is notfound and
+	// check if the notfound should be ignored
+	if strings.Contains(ctn, "notfound") &&
+		!strings.Contains(ctn, "ignorenotfound") {
+		return types.ContainerJSON{},
+			errdefs.NotFound(fmt.Errorf("Error: No such container: %s", ctn))
+	}
+
+	// check if the container is not-found and
+	// check if the not-found should be ignored
+	if strings.Contains(ctn, "not-found") &&
+		!strings.Contains(ctn, "ignore-not-found") {
 		return types.ContainerJSON{},
 			errdefs.NotFound(fmt.Errorf("Error: No such container: %s", ctn))
 	}
@@ -186,7 +207,8 @@ func (c *ContainerService) ContainerInspectWithRaw(ctx context.Context, ctn stri
 	}
 
 	// check if the container is not found
-	if strings.Contains(ctn, "notfound") || strings.Contains(ctn, "not-found") {
+	if strings.Contains(ctn, "notfound") ||
+		strings.Contains(ctn, "not-found") {
 		return types.ContainerJSON{},
 			nil,
 			errdefs.NotFound(fmt.Errorf("Error: No such container: %s", ctn))
@@ -225,7 +247,8 @@ func (c *ContainerService) ContainerKill(ctx context.Context, ctn, signal string
 	}
 
 	// check if the container is not found
-	if strings.Contains(ctn, "notfound") || strings.Contains(ctn, "not-found") {
+	if strings.Contains(ctn, "notfound") ||
+		strings.Contains(ctn, "not-found") {
 		return errdefs.NotFound(fmt.Errorf("Error: No such container: %s", ctn))
 	}
 
@@ -252,7 +275,8 @@ func (c *ContainerService) ContainerLogs(ctx context.Context, ctn string, option
 	}
 
 	// check if the container is not found
-	if strings.Contains(ctn, "notfound") || strings.Contains(ctn, "not-found") {
+	if strings.Contains(ctn, "notfound") ||
+		strings.Contains(ctn, "not-found") {
 		return nil, errdefs.NotFound(fmt.Errorf("Error: No such container: %s", ctn))
 	}
 
@@ -339,7 +363,8 @@ func (c *ContainerService) ContainerStart(ctx context.Context, ctn string, optio
 	}
 
 	// check if the container is not found
-	if strings.Contains(ctn, "notfound") || strings.Contains(ctn, "not-found") {
+	if strings.Contains(ctn, "notfound") ||
+		strings.Contains(ctn, "not-found") {
 		return errdefs.NotFound(fmt.Errorf("Error: No such container: %s", ctn))
 	}
 
@@ -416,14 +441,16 @@ func (c *ContainerService) ContainerWait(ctx context.Context, ctn string, condit
 	ctnCh := make(chan container.ContainerWaitOKBody)
 	errCh := make(chan error)
 
-	// defer closing the error channel
-	defer close(errCh)
+	// defer closing the channels
+	defer func() {
+		// close the container channel
+		close(ctnCh)
+		// close the error channel
+		close(errCh)
+	}()
 
 	// verify a container was provided
 	if len(ctn) == 0 {
-		// defer closing the container channel
-		defer close(ctnCh)
-
 		// propagate the error to the error channel
 		errCh <- errors.New("no container provided")
 
@@ -432,9 +459,6 @@ func (c *ContainerService) ContainerWait(ctx context.Context, ctn string, condit
 
 	// check if the container is not found
 	if strings.Contains(ctn, "notfound") || strings.Contains(ctn, "not-found") {
-		// defer closing the container channel
-		defer close(ctnCh)
-
 		// propagate the error to the error channel
 		errCh <- errdefs.NotFound(fmt.Errorf("Error: No such container: %s", ctn))
 
@@ -443,20 +467,14 @@ func (c *ContainerService) ContainerWait(ctx context.Context, ctn string, condit
 
 	// create response object to return
 	response := container.ContainerWaitOKBody{
-		Error:      nil,
-		StatusCode: 0,
+		StatusCode: 15,
 	}
 
-	go func() {
-		// defer closing the container channel
-		defer close(ctnCh)
+	// sleep for 1 second to simulate waiting for the container
+	time.Sleep(1 * time.Second)
 
-		// sleep for 1 second to simulate waiting for the container
-		time.Sleep(1 * time.Second)
-
-		// propagate the response to the container channel
-		ctnCh <- response
-	}()
+	// propagate the response to the container channel
+	ctnCh <- response
 
 	return ctnCh, errCh
 }

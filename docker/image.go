@@ -158,8 +158,20 @@ func (i *ImageService) ImagePull(ctx context.Context, image string, options type
 		return nil, errors.New("no container provided")
 	}
 
-	// check if the image is not found
-	if strings.Contains(image, "notfound") || strings.Contains(image, "not-found") {
+	// check if the image is notfound and
+	// check if the notfound should be ignored
+	if strings.Contains(image, "notfound") &&
+		!strings.Contains(image, "ignorenotfound") {
+		return nil,
+			errdefs.NotFound(
+				fmt.Errorf("Error response from daemon: manifest for %s not found: manifest unknown", image),
+			)
+	}
+
+	// check if the image is not-found and
+	// check if the not-found should be ignored
+	if strings.Contains(image, "not-found") &&
+		!strings.Contains(image, "ignore-not-found") {
 		return nil,
 			errdefs.NotFound(
 				fmt.Errorf("Error response from daemon: manifest for %s not found: manifest unknown", image),
