@@ -438,16 +438,8 @@ func (c *ContainerService) ContainerUpdate(ctx context.Context, ctn string, upda
 //
 // https://pkg.go.dev/github.com/docker/docker/client?tab=doc#Client.ContainerWait
 func (c *ContainerService) ContainerWait(ctx context.Context, ctn string, condition container.WaitCondition) (<-chan container.ContainerWaitOKBody, <-chan error) {
-	ctnCh := make(chan container.ContainerWaitOKBody)
-	errCh := make(chan error)
-
-	// defer closing the channels
-	defer func() {
-		// close the container channel
-		close(ctnCh)
-		// close the error channel
-		close(errCh)
-	}()
+	ctnCh := make(chan container.ContainerWaitOKBody, 1)
+	errCh := make(chan error, 1)
 
 	// verify a container was provided
 	if len(ctn) == 0 {
@@ -465,16 +457,22 @@ func (c *ContainerService) ContainerWait(ctx context.Context, ctn string, condit
 		return ctnCh, errCh
 	}
 
-	// create response object to return
-	response := container.ContainerWaitOKBody{
-		StatusCode: 15,
-	}
+	// create goroutine for responding to call
+	go func() {
+		// create response object to return
+		response := container.ContainerWaitOKBody{
+			StatusCode: 15,
+		}
 
-	// sleep for 1 second to simulate waiting for the container
-	time.Sleep(1 * time.Second)
+		// sleep for 1 second to simulate waiting for the container
+		time.Sleep(1 * time.Second)
 
-	// propagate the response to the container channel
-	ctnCh <- response
+		// propagate the response to the container channel
+		ctnCh <- response
+
+		// propagate nil to the error channel
+		errCh <- nil
+	}()
 
 	return ctnCh, errCh
 }
