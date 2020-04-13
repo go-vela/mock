@@ -8,12 +8,15 @@ import (
 	"context"
 	"encoding/json"
 	"errors"
+	"fmt"
+	"strings"
 	"time"
 
 	"github.com/docker/docker/api/types"
 	"github.com/docker/docker/api/types/filters"
 	"github.com/docker/docker/api/types/network"
 	"github.com/docker/docker/client"
+	"github.com/docker/docker/errdefs"
 	"github.com/docker/docker/pkg/stringid"
 )
 
@@ -37,6 +40,22 @@ func (n *NetworkService) NetworkCreate(ctx context.Context, name string, options
 	// verify a network was provided
 	if len(name) == 0 {
 		return types.NetworkCreateResponse{}, errors.New("no network provided")
+	}
+
+	// check if the network is notfound and
+	// check if the notfound should be ignored
+	if strings.Contains(name, "notfound") &&
+		!strings.Contains(name, "ignorenotfound") {
+		return types.NetworkCreateResponse{},
+			errdefs.NotFound(fmt.Errorf("Error: No such network: %s", name))
+	}
+
+	// check if the network is not-found and
+	// check if the not-found should be ignored
+	if strings.Contains(name, "not-found") &&
+		!strings.Contains(name, "ignore-not-found") {
+		return types.NetworkCreateResponse{},
+			errdefs.NotFound(fmt.Errorf("Error: No such network: %s", name))
 	}
 
 	// create response object to return
@@ -63,6 +82,18 @@ func (n *NetworkService) NetworkInspect(ctx context.Context, network string, opt
 	// verify a network was provided
 	if len(network) == 0 {
 		return types.NetworkResource{}, errors.New("no network provided")
+	}
+
+	// check if the network is notfound
+	if strings.Contains(network, "notfound") {
+		return types.NetworkResource{},
+			errdefs.NotFound(fmt.Errorf("Error: No such network: %s", network))
+	}
+
+	// check if the network is not-found
+	if strings.Contains(network, "not-found") {
+		return types.NetworkResource{},
+			errdefs.NotFound(fmt.Errorf("Error: No such network: %s", network))
 	}
 
 	// create response object to return
