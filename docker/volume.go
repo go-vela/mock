@@ -9,12 +9,14 @@ import (
 	"encoding/json"
 	"errors"
 	"fmt"
+	"strings"
 	"time"
 
 	"github.com/docker/docker/api/types"
 	"github.com/docker/docker/api/types/filters"
 	"github.com/docker/docker/api/types/volume"
 	"github.com/docker/docker/client"
+	"github.com/docker/docker/errdefs"
 	"github.com/docker/docker/pkg/stringid"
 )
 
@@ -30,6 +32,22 @@ func (v *VolumeService) VolumeCreate(ctx context.Context, options volume.VolumeC
 	// verify a volume was provided
 	if len(options.Name) == 0 {
 		return types.Volume{}, errors.New("no volume provided")
+	}
+
+	// check if the volume is notfound and
+	// check if the notfound should be ignored
+	if strings.Contains(options.Name, "notfound") &&
+		!strings.Contains(options.Name, "ignorenotfound") {
+		return types.Volume{},
+			errdefs.NotFound(fmt.Errorf("Error: No such volume: %s", options.Name))
+	}
+
+	// check if the volume is not-found and
+	// check if the not-found should be ignored
+	if strings.Contains(options.Name, "not-found") &&
+		!strings.Contains(options.Name, "ignore-not-found") {
+		return types.Volume{},
+			errdefs.NotFound(fmt.Errorf("Error: No such volume: %s", options.Name))
 	}
 
 	// create response object to return
@@ -56,6 +74,18 @@ func (v *VolumeService) VolumeInspect(ctx context.Context, volumeID string) (typ
 		return types.Volume{}, errors.New("no volume provided")
 	}
 
+	// check if the volume is notfound
+	if strings.Contains(volumeID, "notfound") {
+		return types.Volume{},
+			errdefs.NotFound(fmt.Errorf("Error: No such volume: %s", volumeID))
+	}
+
+	// check if the volume is not-found
+	if strings.Contains(volumeID, "not-found") {
+		return types.Volume{},
+			errdefs.NotFound(fmt.Errorf("Error: No such volume: %s", volumeID))
+	}
+
 	// create response object to return
 	response := types.Volume{
 		CreatedAt:  time.Now().String(),
@@ -77,6 +107,18 @@ func (v *VolumeService) VolumeInspectWithRaw(ctx context.Context, volumeID strin
 	// verify a volume was provided
 	if len(volumeID) == 0 {
 		return types.Volume{}, nil, errors.New("no volume provided")
+	}
+
+	// check if the volume is notfound
+	if strings.Contains(volumeID, "notfound") {
+		return types.Volume{}, nil,
+			errdefs.NotFound(fmt.Errorf("Error: No such volume: %s", volumeID))
+	}
+
+	// check if the volume is not-found
+	if strings.Contains(volumeID, "not-found") {
+		return types.Volume{}, nil,
+			errdefs.NotFound(fmt.Errorf("Error: No such volume: %s", volumeID))
 	}
 
 	// create response object to return
