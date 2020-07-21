@@ -143,5 +143,5 @@ func removeHook(c *gin.Context) {
 		return
 	}
 
-	c.String(200, fmt.Sprintf("Hook %s removed", s))
+	c.JSON(200, fmt.Sprintf("Hook %s removed", s))
 }

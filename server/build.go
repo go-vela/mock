@@ -227,7 +227,7 @@ func removeBuild(c *gin.Context) {
 		return
 	}
 
-	c.String(http.StatusOK, fmt.Sprintf("Build %s removed", b))
+	c.JSON(http.StatusOK, fmt.Sprintf("Build %s removed", b))
 }
 
 // restartBuild has a param :build returns mock JSON for a http POST.

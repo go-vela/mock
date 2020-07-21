@@ -161,5 +161,5 @@ func removeSecret(c *gin.Context) {
 		return
 	}
 
-	c.String(http.StatusOK, fmt.Sprintf("Secret %s removed", n))
+	c.JSON(http.StatusOK, fmt.Sprintf("Secret %s removed", n))
 }

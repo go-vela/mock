@@ -149,5 +149,5 @@ func removeStep(c *gin.Context) {
 		return
 	}
 
-	c.String(200, fmt.Sprintf("Step %s removed", s))
+	c.JSON(200, fmt.Sprintf("Step %s removed", s))
 }
