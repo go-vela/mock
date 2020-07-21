@@ -158,7 +158,7 @@ func removeRepo(c *gin.Context) {
 		return
 	}
 
-	c.String(http.StatusOK, fmt.Sprintf("Repo %s removed", r))
+	c.JSON(http.StatusOK, fmt.Sprintf("Repo %s removed", r))
 }
 
 // repairRepo has a param :repo returns mock JSON for a http PATCH.
@@ -175,7 +175,7 @@ func repairRepo(c *gin.Context) {
 		return
 	}
 
-	c.String(http.StatusOK, fmt.Sprintf("Repo %s repaired", r))
+	c.JSON(http.StatusOK, fmt.Sprintf("Repo %s repaired", r))
 }
 
 // chownRepo has a param :repo returns mock JSON for a http PATCH.
@@ -192,5 +192,5 @@ func chownRepo(c *gin.Context) {
 		return
 	}
 
-	c.String(http.StatusOK, fmt.Sprintf("Repo %s changed org", r))
+	c.JSON(http.StatusOK, fmt.Sprintf("Repo %s changed org", r))
 }

@@ -140,5 +140,5 @@ func removeService(c *gin.Context) {
 		return
 	}
 
-	c.String(200, fmt.Sprintf("Service %s removed", s))
+	c.JSON(200, fmt.Sprintf("Service %s removed", s))
 }

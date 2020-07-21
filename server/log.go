@@ -95,7 +95,7 @@ func removeServiceLog(c *gin.Context) {
 		return
 	}
 
-	c.String(http.StatusOK, fmt.Sprintf("Log %s removed", s))
+	c.JSON(http.StatusOK, fmt.Sprintf("Log %s removed", s))
 }
 
 // getStepLog has a param :step returns mock JSON for a http GET.
@@ -166,5 +166,5 @@ func removeStepLog(c *gin.Context) {
 		return
 	}
 
-	c.String(http.StatusOK, fmt.Sprintf("Log %s removed", s))
+	c.JSON(http.StatusOK, fmt.Sprintf("Log %s removed", s))
 }
