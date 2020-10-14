@@ -1,6 +1,6 @@
 module github.com/go-vela/mock
 
-go 1.13
+go 1.15
 
 require (
 	github.com/Azure/go-ansiterm v0.0.0-20170929234023-d6e3b3328b78 // indirect
@@ -10,7 +10,7 @@ require (
 	github.com/docker/go-connections v0.4.0 // indirect
 	github.com/docker/go-units v0.4.0 // indirect
 	github.com/gin-gonic/gin v1.6.3
-	github.com/go-playground/validator/v10 v10.3.0 // indirect
+	github.com/go-playground/validator/v10 v10.4.0 // indirect
 	github.com/go-vela/types v0.6.0
 	github.com/gogo/protobuf v1.3.1 // indirect
 	github.com/golang/protobuf v1.4.2 // indirect
@@ -22,12 +22,14 @@ require (
 	github.com/opencontainers/go-digest v1.0.0 // indirect
 	github.com/opencontainers/image-spec v1.0.1 // indirect
 	github.com/pkg/errors v0.9.1 // indirect
-	github.com/sirupsen/logrus v1.6.0 // indirect
-	golang.org/x/net v0.0.0-20200707034311-ab3426394381 // indirect
-	golang.org/x/sys v0.0.0-20200810151505-1b9f1253b3ed // indirect
+	github.com/sirupsen/logrus v1.7.0 // indirect
+	github.com/ugorji/go v1.1.11 // indirect
+	golang.org/x/crypto v0.0.0-20201012173705-84dcc777aaee // indirect
+	golang.org/x/net v0.0.0-20201010224723-4f7140c49acb // indirect
+	golang.org/x/sys v0.0.0-20201013081832-0aaa2718063a // indirect
 	golang.org/x/time v0.0.0-20191024005414-555d28b269f0 // indirect
-	google.golang.org/genproto v0.0.0-20200808173500-a06252235341 // indirect
-	google.golang.org/grpc v1.31.0 // indirect
+	google.golang.org/genproto v0.0.0-20201012135029-0c95dc0d88e8 // indirect
+	google.golang.org/grpc v1.33.0 // indirect
 	google.golang.org/protobuf v1.25.0 // indirect
 	gotest.tools v2.2.0+incompatible // indirect
 )
