@@ -16,7 +16,7 @@ import (
 )
 
 const (
-	// WorkerResp represents a JSON return for a single build.
+	// WorkerResp represents a JSON return for a single worker.
 	WorkerResp = `
 		{
 			"id": 1,
