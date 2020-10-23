@@ -78,6 +78,13 @@ func FakeHandler() http.Handler {
 	e.PUT("/api/v1/repos/:org/:repo/builds/:build/services/:service", updateService)
 	e.DELETE("/api/v1/repos/:org/:repo/builds/:build/services/:service", removeService)
 
+	// mock endpoints for user calls
+	e.GET("/api/v1/users/:user", getUser)
+	e.GET("/api/v1/users", getUsers)
+	e.POST("/api/v1/users", addUser)
+	e.PUT("/api/v1/users/:user", updateUser)
+	e.DELETE("/api/v1/users/:user", removeUser)
+
 	// mock endpoints for worker calls
 	e.GET("/api/v1/workers", getWorkers)
 	e.GET("/api/v1/workers/:worker", getWorker)
