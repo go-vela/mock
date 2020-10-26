@@ -18,69 +18,69 @@ import (
 const (
 	// SecretResp represents a JSON return for a single secret.
 	SecretResp = `{
-		"id": 1,
-		"org": "github",
-		"repo": "octocat",
-		"team": "",
-		"name": "foo",
-		"value": "",
-		"type": "repo",
-		"images": [
-			"alpine"
-		],
-		"events": [
-			"push"
-		]
-	}`
+  "id": 1,
+  "org": "github",
+  "repo": "octocat",
+  "team": "",
+  "name": "foo",
+  "value": "",
+  "type": "repo",
+  "images": [
+    "alpine"
+  ],
+  "events": [
+    "push"
+  ]
+}`
 
 	// SecretsResp represents a JSON return for one to many secrets.
 	SecretsResp = `[
-		{
-			"id": 1,
-			"org": "github",
-			"repo": "octocat",
-			"team": "",
-			"name": "foo",
-			"value": "",
-			"type": "repo",
-			"images": [
-				"alpine"
-			],
-			"events": [
-				"push"
-			]
-		},
-		{
-			"id": 2,
-			"org": "github",
-			"repo": "*",
-			"team": "",
-			"name": "foo",
-			"value": "",
-			"type": "org",
-			"images": [
-				"alpine"
-			],
-			"events": [
-				"push"
-			]
-		},
-		{
-			"id": 3,
-			"org": "github",
-			"repo": "",
-			"team": "octokitties",
-			"name": "foo",
-			"value": "",
-			"type": "shared",
-			"images": [
-				"alpine"
-			],
-			"events": [
-				"push"
-			]
-		}
-	]`
+  {
+    "id": 1,
+    "org": "github",
+    "repo": "octocat",
+    "team": "",
+    "name": "foo",
+    "value": "",
+    "type": "repo",
+    "images": [
+      "alpine"
+    ],
+    "events": [
+      "push"
+    ]
+  },
+  {
+    "id": 2,
+    "org": "github",
+    "repo": "*",
+    "team": "",
+    "name": "foo",
+    "value": "",
+    "type": "org",
+    "images": [
+      "alpine"
+    ],
+    "events": [
+      "push"
+    ]
+  },
+  {
+    "id": 3,
+    "org": "github",
+    "repo": "",
+    "team": "octokitties",
+    "name": "foo",
+    "value": "",
+    "type": "shared",
+    "images": [
+      "alpine"
+    ],
+    "events": [
+      "push"
+    ]
+  }
+]`
 )
 
 // getSecrets returns mock JSON for a http GET.

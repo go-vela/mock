@@ -18,51 +18,51 @@ import (
 const (
 	// HookResp represents a JSON return for a single hook.
 	HookResp = `{
-		"id": 1,
-		"repo_id": 1,
-		"build_id": 1,
-		"number": 1,
-		"source_id": "c8da1302-07d6-11ea-882f-4893bca275b8",
-		"created": 1563475419,
-		"host": "github.com",
-		"event": "push",
-		"branch": "master",
-		"error": "",
-		"status": "success",
-		"link": "https://github.com/github/octocat/settings/hooks/1"
-	}`
+  "id": 1,
+  "repo_id": 1,
+  "build_id": 1,
+  "number": 1,
+  "source_id": "c8da1302-07d6-11ea-882f-4893bca275b8",
+  "created": 1563475419,
+  "host": "github.com",
+  "event": "push",
+  "branch": "master",
+  "error": "",
+  "status": "success",
+  "link": "https://github.com/github/octocat/settings/hooks/1"
+}`
 
 	// HooksResp represents a JSON return for one to many hooks.
 	HooksResp = `[
-	{
-		"id": 2,
-		"repo_id": 1,
-		"build_id": 1,
-		"number": 2,
-		"source_id": "c8da1302-07d6-11ea-882f-4893bca275b8",
-		"created": 1563475420,
-		"host": "github.com",
-		"event": "push",
-		"branch": "master",
-		"error": "",
-		"status": "success",
-		"link": "https://github.com/github/octocat/settings/hooks/1"
-	},
-	{
-		"id": 1,
-		"repo_id": 1,
-		"build_id": 1,
-		"number": 1,
-		"source_id": "c8da1302-07d6-11ea-882f-4893bca275b8",
-		"created": 1563475419,
-		"host": "github.com",
-		"event": "push",
-		"branch": "master",
-		"error": "",
-		"status": "success",
-		"link": "https://github.com/github/octocat/settings/hooks/1"
-	}   
-	]`
+  {
+    "id": 2,
+    "repo_id": 1,
+    "build_id": 1,
+    "number": 2,
+    "source_id": "c8da1302-07d6-11ea-882f-4893bca275b8",
+    "created": 1563475420,
+    "host": "github.com",
+    "event": "push",
+    "branch": "master",
+    "error": "",
+    "status": "success",
+    "link": "https://github.com/github/octocat/settings/hooks/1"
+  },
+  {
+    "id": 1,
+    "repo_id": 1,
+    "build_id": 1,
+    "number": 1,
+    "source_id": "c8da1302-07d6-11ea-882f-4893bca275b8",
+    "created": 1563475419,
+    "host": "github.com",
+    "event": "push",
+    "branch": "master",
+    "error": "",
+    "status": "success",
+    "link": "https://github.com/github/octocat/settings/hooks/1"
+  }
+]`
 )
 
 // getHooks returns mock JSON for a http GET.
