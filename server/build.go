@@ -17,116 +17,115 @@ import (
 
 const (
 	// BuildResp represents a JSON return for a single build.
-	BuildResp = `
-	{
-		"id": 1,
-		"repo_id": 1,
-		"number": 1,
-		"parent": 1,
-		"event": "push",
-		"status": "created",
-		"error": "",
-		"enqueued": 1563474077,
-		"created": 1563474076,
-		"started": 1563474077,
-		"finished": 0,
-		"deploy": "",
-		"clone": "https://github.com/github/octocat.git",
-		"source": "https://github.com/github/octocat/commit/48afb5bdc41ad69bf22588491333f7cf71135163",
-		"title": "push received from https://github.com/github/octocat",
-		"message": "First commit...",
-		"commit": "48afb5bdc41ad69bf22588491333f7cf71135163",
-		"sender": "OctoKitty",
-		"author": "OctoKitty",
-		"email": "octokitty@github.com",
-		"link": "https://vela.example.company.com/github/octocat/1",
-		"branch": "master",
-		"ref": "refs/heads/master",
-		"base_ref": "",
-		"host": "example.company.com",
-		"runtime": "docker",
-		"distribution": "linux"
-	}`
+	BuildResp = `{
+  "id": 1,
+  "repo_id": 1,
+  "number": 1,
+  "parent": 1,
+  "event": "push",
+  "status": "created",
+  "error": "",
+  "enqueued": 1563474077,
+  "created": 1563474076,
+  "started": 1563474077,
+  "finished": 0,
+  "deploy": "",
+  "clone": "https://github.com/github/octocat.git",
+  "source": "https://github.com/github/octocat/commit/48afb5bdc41ad69bf22588491333f7cf71135163",
+  "title": "push received from https://github.com/github/octocat",
+  "message": "First commit...",
+  "commit": "48afb5bdc41ad69bf22588491333f7cf71135163",
+  "sender": "OctoKitty",
+  "author": "OctoKitty",
+  "email": "octokitty@github.com",
+  "link": "https://vela.example.company.com/github/octocat/1",
+  "branch": "master",
+  "ref": "refs/heads/master",
+  "base_ref": "",
+  "host": "example.company.com",
+  "runtime": "docker",
+  "distribution": "linux"
+}`
 
 	// BuildsResp represents a JSON return for one to many builds.
 	BuildsResp = `[
-		{
-			"id": 2,
-			"repo_id": 1,
-			"number": 2,
-			"parent": 1,
-			"event": "push",
-			"status": "running",
-			"error": "",
-			"enqueued": 1563474204,
-			"created": 1563474204,
-			"started": 1563474204,
-			"finished": 0,
-			"deploy": "",
-			"clone": "https://github.com/github/octocat.git",
-			"source": "https://github.com/github/octocat/commit/48afb5bdc41ad69bf22588491333f7cf71135163",
-			"title": "push received from https://github.com/github/octocat",
-			"message": "Second commit...",
-			"commit": "48afb5bdc41ad69bf22588491333f7cf71135163",
-			"sender": "OctoKitty",
-			"author": "OctoKitty",
-			"email": "octokitty@github.com",
-			"link": "https://vela.example.company.com/github/octocat/1",
-			"branch": "master",
-			"ref": "refs/heads/master",
-			"base_ref": "",
-			"host": "ed95dcc0687c",
-			"runtime": "",
-			"distribution": ""
-		},
-		{
-			"id": 1,
-			"repo_id": 1,
-			"number": 1,
-			"parent": 1,
-			"event": "push",
-			"status": "running",
-			"error": "",
-			"enqueued": 1563474077,
-			"created": 1563474076,
-			"started": 1563474077,
-			"finished": 0,
-			"deploy": "",
-			"clone": "https://github.com/github/octocat.git",
-			"source": "https://github.com/github/octocat/commit/48afb5bdc41ad69bf22588491333f7cf71135163",
-			"title": "push received from https://github.com/github/octocat",
-			"message": "First commit...",
-			"commit": "48afb5bdc41ad69bf22588491333f7cf71135163",
-			"sender": "OctoKitty",
-			"author": "OctoKitty",
-			"email": "octokitty@github.com",
-			"link": "https://vela.example.company.com/github/octocat/1",
-			"branch": "master",
-			"ref": "refs/heads/master",
-			"base_ref": "",
-			"host": "82823eb770b0",
-			"runtime": "",
-			"distribution": ""
-		}
-	]`
+  {
+    "id": 2,
+    "repo_id": 1,
+    "number": 2,
+    "parent": 1,
+    "event": "push",
+    "status": "running",
+    "error": "",
+    "enqueued": 1563474204,
+    "created": 1563474204,
+    "started": 1563474204,
+    "finished": 0,
+    "deploy": "",
+    "clone": "https://github.com/github/octocat.git",
+    "source": "https://github.com/github/octocat/commit/48afb5bdc41ad69bf22588491333f7cf71135163",
+    "title": "push received from https://github.com/github/octocat",
+    "message": "Second commit...",
+    "commit": "48afb5bdc41ad69bf22588491333f7cf71135163",
+    "sender": "OctoKitty",
+    "author": "OctoKitty",
+    "email": "octokitty@github.com",
+    "link": "https://vela.example.company.com/github/octocat/1",
+    "branch": "master",
+    "ref": "refs/heads/master",
+    "base_ref": "",
+    "host": "ed95dcc0687c",
+    "runtime": "",
+    "distribution": ""
+  },
+  {
+    "id": 1,
+    "repo_id": 1,
+    "number": 1,
+    "parent": 1,
+    "event": "push",
+    "status": "running",
+    "error": "",
+    "enqueued": 1563474077,
+    "created": 1563474076,
+    "started": 1563474077,
+    "finished": 0,
+    "deploy": "",
+    "clone": "https://github.com/github/octocat.git",
+    "source": "https://github.com/github/octocat/commit/48afb5bdc41ad69bf22588491333f7cf71135163",
+    "title": "push received from https://github.com/github/octocat",
+    "message": "First commit...",
+    "commit": "48afb5bdc41ad69bf22588491333f7cf71135163",
+    "sender": "OctoKitty",
+    "author": "OctoKitty",
+    "email": "octokitty@github.com",
+    "link": "https://vela.example.company.com/github/octocat/1",
+    "branch": "master",
+    "ref": "refs/heads/master",
+    "base_ref": "",
+    "host": "82823eb770b0",
+    "runtime": "",
+    "distribution": ""
+  }
+]`
 
 	// BuildLogsResp represents a JSON return for build logs.
 	BuildLogsResp = `[
-		{
-			"id": 1,
-			"step_id": 1,
-			"build_id": 1,
-			"repo_id": 1,
-			"data": "SGVsbG8sIFdvcmxkIQ=="
-		},
-		{
-			"id": 2,
-			"step_id": 2,
-			"build_id": 1,
-			"repo_id": 1,
-			"data": "SGVsbG8sIFdvcmxkIQ=="
-		}
-	]`
+  {
+    "id": 1,
+    "step_id": 1,
+    "build_id": 1,
+    "repo_id": 1,
+    "data": "SGVsbG8sIFdvcmxkIQ=="
+  },
+  {
+    "id": 2,
+    "step_id": 2,
+    "build_id": 1,
+    "repo_id": 1,
+    "data": "SGVsbG8sIFdvcmxkIQ=="
+  }
+]`
 )
 
 // getBuilds returns mock JSON for a http GET.

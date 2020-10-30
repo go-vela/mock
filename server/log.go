@@ -18,13 +18,13 @@ import (
 const (
 	// LogResp represents a JSON return for a single log.
 	LogResp = `{
-		"id": 1,
-		"build_id": 1,
-		"repo_id": 1,
-		"service_id": 1,
-		"step_id": 1,
-		"data": "SGVsbG8sIFdvcmxkIQ=="
-	}`
+  "id": 1,
+  "build_id": 1,
+  "repo_id": 1,
+  "service_id": 1,
+  "step_id": 1,
+  "data": "SGVsbG8sIFdvcmxkIQ=="
+}`
 )
 
 // getServiceLog has a param :service returns mock JSON for a http GET.

@@ -29,20 +29,20 @@ const (
 	// UsersResp represents a JSON return for one to many users.
 	UsersResp = `[
   {
-  "id": 2,
-  "name": "octocat",
-  "token": null,
-  "favorites": ["github/octocat"],
-  "active": true,
-  "admin": false
-},
-{
-  "id": 1,
-  "name": "OctoKitty",
-  "token": null,
-  "favorites": ["github/octocat"],
-  "active": true,
-  "admin": false
+    "id": 2,
+    "name": "octocat",
+    "token": null,
+    "favorites": ["github/octocat"],
+    "active": true,
+    "admin": false
+  },
+  {
+    "id": 1,
+    "name": "OctoKitty",
+    "token": null,
+    "favorites": ["github/octocat"],
+    "active": true,
+    "admin": false
   }
 ]`
 )

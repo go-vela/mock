@@ -18,48 +18,48 @@ import (
 const (
 	// ServiceResp represents a JSON return for a single service.
 	ServiceResp = `{
-		"id": 1,
-		"build_id": 1,
-		"repo_id": 1,
-		"number": 1,
-		"name": "clone",
-		"status": "success",
-		"error": "",
-		"exit_code": 0,
-		"created": 1563475419,
-		"started": 1563475420,
-		"finished": 1563475421
-	}`
+  "id": 1,
+  "build_id": 1,
+  "repo_id": 1,
+  "number": 1,
+  "name": "clone",
+  "status": "success",
+  "error": "",
+  "exit_code": 0,
+  "created": 1563475419,
+  "started": 1563475420,
+  "finished": 1563475421
+}`
 
 	// ServicesResp represents a JSON return for one to many services.
 	ServicesResp = `[
-		{
-			"id": 2,
-			"build_id": 1,
-			"repo_id": 1,
-			"number": 2,
-			"name": "build",
-			"status": "success",
-			"error": "",
-			"exit_code": 0,
-			"created": 1563475419,
-			"started": 1563475420,
-			"finished": 1563475421
-		},
-		{
-			"id": 1,
-			"build_id": 1,
-			"repo_id": 1,
-			"number": 1,
-			"name": "clone",
-			"status": "success",
-			"error": "",
-			"exit_code": 0,
-			"created": 1563475419,
-			"started": 1563475420,
-			"finished": 1563475421
-		}   
-	]`
+  {
+    "id": 2,
+    "build_id": 1,
+    "repo_id": 1,
+    "number": 2,
+    "name": "build",
+    "status": "success",
+    "error": "",
+    "exit_code": 0,
+    "created": 1563475419,
+    "started": 1563475420,
+    "finished": 1563475421
+  },
+  {
+    "id": 1,
+    "build_id": 1,
+    "repo_id": 1,
+    "number": 1,
+    "name": "clone",
+    "status": "success",
+    "error": "",
+    "exit_code": 0,
+    "created": 1563475419,
+    "started": 1563475420,
+    "finished": 1563475421
+  }
+]`
 )
 
 // getServices returns mock JSON for a http GET.

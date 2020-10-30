@@ -18,57 +18,57 @@ import (
 const (
 	// StepResp represents a JSON return for a single step.
 	StepResp = `{
-		"id": 1,
-		"build_id": 1,
-		"repo_id": 1,
-		"number": 1,
-		"name": "clone",
-		"status": "success",
-		"error": "",
-		"exit_code": 0,
-		"created": 1563475419,
-		"started": 0,
-		"finished": 0,
-		"host": "host.company.com",
-		"runtime": "docker",
-		"distribution": "linux"
-	}`
+  "id": 1,
+  "build_id": 1,
+  "repo_id": 1,
+  "number": 1,
+  "name": "clone",
+  "status": "success",
+  "error": "",
+  "exit_code": 0,
+  "created": 1563475419,
+  "started": 0,
+  "finished": 0,
+  "host": "host.company.com",
+  "runtime": "docker",
+  "distribution": "linux"
+}`
 
 	// StepsResp represents a JSON return for one to many steps.
 	StepsResp = `[
-		{
-			"id": 2,
-			"build_id": 1,
-			"repo_id": 1,
-			"number": 2,
-			"name": "build",
-			"status": "success",
-			"error": "",
-			"exit_code": 0,
-			"created": 1563475419,
-			"started": 0,
-			"finished": 0,
-			"host": "host.company.com",
-			"runtime": "docker",
-			"distribution": "linux"
-		},
-		{
-			"id": 1,
-			"build_id": 1,
-			"repo_id": 1,
-			"number": 1,
-			"name": "clone",
-			"status": "success",
-			"error": "",
-			"exit_code": 0,
-			"created": 1563475419,
-			"started": 0,
-			"finished": 0,
-			"host": "host.company.com",
-			"runtime": "docker",
-			"distribution": "linux"
-		}    
-	]`
+  {
+    "id": 2,
+    "build_id": 1,
+    "repo_id": 1,
+    "number": 2,
+    "name": "build",
+    "status": "success",
+    "error": "",
+    "exit_code": 0,
+    "created": 1563475419,
+    "started": 0,
+    "finished": 0,
+    "host": "host.company.com",
+    "runtime": "docker",
+    "distribution": "linux"
+  },
+  {
+    "id": 1,
+    "build_id": 1,
+    "repo_id": 1,
+    "number": 1,
+    "name": "clone",
+    "status": "success",
+    "error": "",
+    "exit_code": 0,
+    "created": 1563475419,
+    "started": 0,
+    "finished": 0,
+    "host": "host.company.com",
+    "runtime": "docker",
+    "distribution": "linux"
+  }
+]`
 )
 
 // getSteps returns mock JSON for a http GET.
