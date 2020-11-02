@@ -61,6 +61,13 @@ func (m *mock) DialSession(ctx context.Context, proto string, meta map[string][]
 	return nil, nil
 }
 
+// DialHijack is a helper function to simulate
+// returning a hijacked connection with
+// negotiated protocol proto.
+func (m *mock) DialHijack(ctx context.Context, url, proto string, meta map[string][]string) (net.Conn, error) {
+	return nil, nil
+}
+
 // Dialer is a helper function to simulate
 // returning a dialer for the raw stream
 // connection, with HTTP/1.1 header, that can
