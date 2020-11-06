@@ -6,7 +6,7 @@ package docker
 
 // Version represents the supported
 // Docker API version for the mock.
-const Version = "v1.38"
+const Version = "v1.40"
 
 // New returns a client that is capable of handling
 // Docker client calls and returning stub responses.
