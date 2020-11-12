@@ -5,7 +5,6 @@
 package server
 
 import (
-	"encoding/json"
 	"fmt"
 	"net/http"
 	"strings"
@@ -13,6 +12,8 @@ import (
 	"github.com/gin-gonic/gin"
 	"github.com/go-vela/types"
 	"github.com/go-vela/types/yaml"
+
+	yml "github.com/buildkite/yaml"
 )
 
 const (
@@ -159,7 +160,7 @@ func getPipeline(c *gin.Context) {
 	data := []byte(PipelineResp)
 
 	var body yaml.Build
-	_ = json.Unmarshal(data, &body)
+	_ = yml.Unmarshal(data, &body)
 
 	c.YAML(http.StatusOK, body)
 }
@@ -181,7 +182,7 @@ func compilePipeline(c *gin.Context) {
 	data := []byte(CompileResp)
 
 	var body yaml.Build
-	_ = json.Unmarshal(data, &body)
+	_ = yml.Unmarshal(data, &body)
 
 	c.YAML(http.StatusOK, body)
 }
@@ -203,7 +204,7 @@ func expandPipeline(c *gin.Context) {
 	data := []byte(ExpandResp)
 
 	var body yaml.Build
-	_ = json.Unmarshal(data, &body)
+	_ = yml.Unmarshal(data, &body)
 
 	c.YAML(http.StatusOK, body)
 }
@@ -225,7 +226,7 @@ func getTemplates(c *gin.Context) {
 	data := []byte(TemplateResp)
 
 	body := make(map[string]*yaml.Template)
-	_ = json.Unmarshal(data, &body)
+	_ = yml.Unmarshal(data, &body)
 
 	c.YAML(http.StatusOK, body)
 }
