@@ -77,7 +77,7 @@ func getWorker(c *gin.Context) {
 	if strings.EqualFold(w, "0") {
 		msg := fmt.Sprintf("Worker %s does not exist", w)
 
-		c.AbortWithStatusJSON(404, types.Error{Message: &msg})
+		c.AbortWithStatusJSON(http.StatusNotFound, types.Error{Message: &msg})
 
 		return
 	}
@@ -109,7 +109,7 @@ func updateWorker(c *gin.Context) {
 	if strings.EqualFold(w, "0") {
 		msg := fmt.Sprintf("Worker %s does not exist", w)
 
-		c.AbortWithStatusJSON(404, types.Error{Message: &msg})
+		c.AbortWithStatusJSON(http.StatusNotFound, types.Error{Message: &msg})
 
 		return
 	}

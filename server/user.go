@@ -66,7 +66,7 @@ func getUser(c *gin.Context) {
 	if strings.Contains(u, "not-found") {
 		msg := fmt.Sprintf("User %s does not exist", u)
 
-		c.AbortWithStatusJSON(404, types.Error{Message: &msg})
+		c.AbortWithStatusJSON(http.StatusNotFound, types.Error{Message: &msg})
 
 		return
 	}
@@ -99,7 +99,7 @@ func updateUser(c *gin.Context) {
 		if strings.Contains(u, "not-found") {
 			msg := fmt.Sprintf("User %s does not exist", u)
 
-			c.AbortWithStatusJSON(404, types.Error{Message: &msg})
+			c.AbortWithStatusJSON(http.StatusNotFound, types.Error{Message: &msg})
 
 			return
 		}
@@ -122,7 +122,7 @@ func removeUser(c *gin.Context) {
 	if strings.Contains(u, "not-found") {
 		msg := fmt.Sprintf("User %s does not exist", u)
 
-		c.AbortWithStatusJSON(404, types.Error{Message: &msg})
+		c.AbortWithStatusJSON(http.StatusNotFound, types.Error{Message: &msg})
 
 		return
 	}

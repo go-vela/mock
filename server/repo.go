@@ -132,7 +132,7 @@ func updateRepo(c *gin.Context) {
 		if strings.Contains(r, "not-found") {
 			msg := fmt.Sprintf("Repo %s does not exist", r)
 
-			c.AbortWithStatusJSON(404, types.Error{Message: &msg})
+			c.AbortWithStatusJSON(http.StatusNotFound, types.Error{Message: &msg})
 
 			return
 		}
@@ -155,7 +155,7 @@ func removeRepo(c *gin.Context) {
 	if strings.Contains(r, "not-found") {
 		msg := fmt.Sprintf("Repo %s does not exist", r)
 
-		c.AbortWithStatusJSON(404, types.Error{Message: &msg})
+		c.AbortWithStatusJSON(http.StatusNotFound, types.Error{Message: &msg})
 
 		return
 	}
@@ -172,7 +172,7 @@ func repairRepo(c *gin.Context) {
 	if strings.Contains(r, "not-found") {
 		msg := fmt.Sprintf("Repo %s does not exist", r)
 
-		c.AbortWithStatusJSON(404, types.Error{Message: &msg})
+		c.AbortWithStatusJSON(http.StatusNotFound, types.Error{Message: &msg})
 
 		return
 	}
@@ -189,7 +189,7 @@ func chownRepo(c *gin.Context) {
 	if strings.Contains(r, "not-found") {
 		msg := fmt.Sprintf("Repo %s does not exist", r)
 
-		c.AbortWithStatusJSON(404, types.Error{Message: &msg})
+		c.AbortWithStatusJSON(http.StatusNotFound, types.Error{Message: &msg})
 
 		return
 	}

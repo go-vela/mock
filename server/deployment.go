@@ -73,7 +73,7 @@ func getDeployment(c *gin.Context) {
 	if strings.EqualFold(d, "0") {
 		msg := fmt.Sprintf("Deployment %s does not exist", d)
 
-		c.AbortWithStatusJSON(404, types.Error{Message: &msg})
+		c.AbortWithStatusJSON(http.StatusNotFound, types.Error{Message: &msg})
 
 		return
 	}

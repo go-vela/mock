@@ -81,7 +81,7 @@ func getService(c *gin.Context) {
 	if strings.EqualFold(s, "0") {
 		msg := fmt.Sprintf("Service %s does not exist", s)
 
-		c.AbortWithStatusJSON(404, types.Error{Message: &msg})
+		c.AbortWithStatusJSON(http.StatusNotFound, types.Error{Message: &msg})
 
 		return
 	}
@@ -114,7 +114,7 @@ func updateService(c *gin.Context) {
 		if strings.EqualFold(s, "0") {
 			msg := fmt.Sprintf("Service %s does not exist", s)
 
-			c.AbortWithStatusJSON(404, types.Error{Message: &msg})
+			c.AbortWithStatusJSON(http.StatusNotFound, types.Error{Message: &msg})
 
 			return
 		}
@@ -137,7 +137,7 @@ func removeService(c *gin.Context) {
 	if strings.EqualFold(s, "0") {
 		msg := fmt.Sprintf("Service %s does not exist", s)
 
-		c.AbortWithStatusJSON(404, types.Error{Message: &msg})
+		c.AbortWithStatusJSON(http.StatusNotFound, types.Error{Message: &msg})
 
 		return
 	}

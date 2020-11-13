@@ -135,7 +135,7 @@ func updateSecret(c *gin.Context) {
 		if strings.Contains(n, "not-found") {
 			msg := fmt.Sprintf("Repo or team %s does not exist for secret", n)
 
-			c.AbortWithStatusJSON(404, types.Error{Message: &msg})
+			c.AbortWithStatusJSON(http.StatusNotFound, types.Error{Message: &msg})
 
 			return
 		}
@@ -158,7 +158,7 @@ func removeSecret(c *gin.Context) {
 	if strings.Contains(n, "not-found") {
 		msg := fmt.Sprintf("Secret %s does not exist", n)
 
-		c.AbortWithStatusJSON(404, types.Error{Message: &msg})
+		c.AbortWithStatusJSON(http.StatusNotFound, types.Error{Message: &msg})
 
 		return
 	}

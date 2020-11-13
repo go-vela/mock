@@ -145,7 +145,7 @@ func getBuild(c *gin.Context) {
 	if strings.EqualFold(b, "0") {
 		msg := fmt.Sprintf("Build %s does not exist", b)
 
-		c.AbortWithStatusJSON(404, types.Error{Message: &msg})
+		c.AbortWithStatusJSON(http.StatusNotFound, types.Error{Message: &msg})
 
 		return
 	}
@@ -192,7 +192,7 @@ func addBuild(c *gin.Context) {
 
 // updateBuild has a param :build returns mock JSON for a http PUT.
 //
-// Pass "0" to :build to test receiving a http 404 response
+// Pass "0" to :build to test receiving a http 404 response.
 func updateBuild(c *gin.Context) {
 	if !strings.Contains(c.FullPath(), "admin") {
 		b := c.Param("build")
@@ -200,7 +200,7 @@ func updateBuild(c *gin.Context) {
 		if strings.EqualFold(b, "0") {
 			msg := fmt.Sprintf("Build %s does not exist", b)
 
-			c.AbortWithStatusJSON(404, types.Error{Message: &msg})
+			c.AbortWithStatusJSON(http.StatusNotFound, types.Error{Message: &msg})
 
 			return
 		}
@@ -223,7 +223,7 @@ func removeBuild(c *gin.Context) {
 	if strings.EqualFold(b, "0") {
 		msg := fmt.Sprintf("Build %s does not exist", b)
 
-		c.AbortWithStatusJSON(404, types.Error{Message: &msg})
+		c.AbortWithStatusJSON(http.StatusNotFound, types.Error{Message: &msg})
 
 		return
 	}
@@ -240,7 +240,7 @@ func restartBuild(c *gin.Context) {
 	if strings.EqualFold(b, "0") {
 		msg := fmt.Sprintf("Build %s does not exist", b)
 
-		c.AbortWithStatusJSON(404, types.Error{Message: &msg})
+		c.AbortWithStatusJSON(http.StatusNotFound, types.Error{Message: &msg})
 
 		return
 	}

@@ -84,7 +84,7 @@ func getHook(c *gin.Context) {
 	if strings.EqualFold(s, "0") {
 		msg := fmt.Sprintf("Hook %s does not exist", s)
 
-		c.AbortWithStatusJSON(404, types.Error{Message: &msg})
+		c.AbortWithStatusJSON(http.StatusNotFound, types.Error{Message: &msg})
 
 		return
 	}
@@ -117,7 +117,7 @@ func updateHook(c *gin.Context) {
 		if strings.EqualFold(s, "0") {
 			msg := fmt.Sprintf("Hook %s does not exist", s)
 
-			c.AbortWithStatusJSON(404, types.Error{Message: &msg})
+			c.AbortWithStatusJSON(http.StatusNotFound, types.Error{Message: &msg})
 
 			return
 		}
@@ -140,10 +140,10 @@ func removeHook(c *gin.Context) {
 	if strings.EqualFold(s, "0") {
 		msg := fmt.Sprintf("Hook %s does not exist", s)
 
-		c.AbortWithStatusJSON(404, types.Error{Message: &msg})
+		c.AbortWithStatusJSON(http.StatusNotFound, types.Error{Message: &msg})
 
 		return
 	}
 
-	c.JSON(200, fmt.Sprintf("Hook %s removed", s))
+	c.JSON(http.StatusOK, fmt.Sprintf("Hook %s removed", s))
 }

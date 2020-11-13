@@ -90,7 +90,7 @@ func getStep(c *gin.Context) {
 	if strings.EqualFold(s, "0") {
 		msg := fmt.Sprintf("Step %s does not exist", s)
 
-		c.AbortWithStatusJSON(404, types.Error{Message: &msg})
+		c.AbortWithStatusJSON(http.StatusNotFound, types.Error{Message: &msg})
 
 		return
 	}
@@ -123,7 +123,7 @@ func updateStep(c *gin.Context) {
 		if strings.EqualFold(s, "0") {
 			msg := fmt.Sprintf("Step %s does not exist", s)
 
-			c.AbortWithStatusJSON(404, types.Error{Message: &msg})
+			c.AbortWithStatusJSON(http.StatusNotFound, types.Error{Message: &msg})
 
 			return
 		}
@@ -146,7 +146,7 @@ func removeStep(c *gin.Context) {
 	if strings.EqualFold(s, "0") {
 		msg := fmt.Sprintf("Step %s does not exist", s)
 
-		c.AbortWithStatusJSON(404, types.Error{Message: &msg})
+		c.AbortWithStatusJSON(http.StatusNotFound, types.Error{Message: &msg})
 
 		return
 	}
