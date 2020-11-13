@@ -126,14 +126,16 @@ func addRepo(c *gin.Context) {
 //
 // Pass "not-found" to :repo to test receiving a http 404 response
 func updateRepo(c *gin.Context) {
-	r := c.Param("repo")
+	if !strings.Contains(c.FullPath(), "admin") {
+		r := c.Param("repo")
 
-	if strings.Contains(r, "not-found") {
-		msg := fmt.Sprintf("Repo %s does not exist", r)
+		if strings.Contains(r, "not-found") {
+			msg := fmt.Sprintf("Repo %s does not exist", r)
 
-		c.AbortWithStatusJSON(404, types.Error{Message: &msg})
+			c.AbortWithStatusJSON(404, types.Error{Message: &msg})
 
-		return
+			return
+		}
 	}
 
 	data := []byte(RepoResp)

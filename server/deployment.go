@@ -95,3 +95,15 @@ func addDeployment(c *gin.Context) {
 
 	c.JSON(http.StatusCreated, body)
 }
+
+// updateDeployment has a param :build returns mock JSON for a http PUT.
+//
+// Pass "0" to :build to test receiving a http 404 response
+func updateDeployment(c *gin.Context) {
+	data := []byte(BuildResp)
+
+	var body library.Build
+	_ = json.Unmarshal(data, &body)
+
+	c.JSON(http.StatusOK, body)
+}

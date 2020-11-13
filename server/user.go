@@ -93,14 +93,16 @@ func addUser(c *gin.Context) {
 //
 // Pass "not-found" to :user to test receiving a http 404 response
 func updateUser(c *gin.Context) {
-	u := c.Param("user")
+	if !strings.Contains(c.FullPath(), "admin") {
+		u := c.Param("user")
 
-	if strings.Contains(u, "not-found") {
-		msg := fmt.Sprintf("User %s does not exist", u)
+		if strings.Contains(u, "not-found") {
+			msg := fmt.Sprintf("User %s does not exist", u)
 
-		c.AbortWithStatusJSON(404, types.Error{Message: &msg})
+			c.AbortWithStatusJSON(404, types.Error{Message: &msg})
 
-		return
+			return
+		}
 	}
 
 	data := []byte(UserResp)

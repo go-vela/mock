@@ -117,14 +117,16 @@ func addStep(c *gin.Context) {
 //
 // Pass "0" to :step to test receiving a http 404 response
 func updateStep(c *gin.Context) {
-	s := c.Param("step")
+	if !strings.Contains(c.FullPath(), "admin") {
+		s := c.Param("step")
 
-	if strings.EqualFold(s, "0") {
-		msg := fmt.Sprintf("Step %s does not exist", s)
+		if strings.EqualFold(s, "0") {
+			msg := fmt.Sprintf("Step %s does not exist", s)
 
-		c.AbortWithStatusJSON(404, types.Error{Message: &msg})
+			c.AbortWithStatusJSON(404, types.Error{Message: &msg})
 
-		return
+			return
+		}
 	}
 
 	data := []byte(StepResp)

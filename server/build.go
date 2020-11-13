@@ -194,14 +194,16 @@ func addBuild(c *gin.Context) {
 //
 // Pass "0" to :build to test receiving a http 404 response
 func updateBuild(c *gin.Context) {
-	b := c.Param("build")
+	if !strings.Contains(c.FullPath(), "admin") {
+		b := c.Param("build")
 
-	if strings.EqualFold(b, "0") {
-		msg := fmt.Sprintf("Build %s does not exist", b)
+		if strings.EqualFold(b, "0") {
+			msg := fmt.Sprintf("Build %s does not exist", b)
 
-		c.AbortWithStatusJSON(404, types.Error{Message: &msg})
+			c.AbortWithStatusJSON(404, types.Error{Message: &msg})
 
-		return
+			return
+		}
 	}
 
 	data := []byte(BuildResp)

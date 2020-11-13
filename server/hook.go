@@ -111,14 +111,16 @@ func addHook(c *gin.Context) {
 //
 // Pass "0" to :hook to test receiving a http 404 response
 func updateHook(c *gin.Context) {
-	s := c.Param("hook")
+	if !strings.Contains(c.FullPath(), "admin") {
+		s := c.Param("hook")
 
-	if strings.EqualFold(s, "0") {
-		msg := fmt.Sprintf("Hook %s does not exist", s)
+		if strings.EqualFold(s, "0") {
+			msg := fmt.Sprintf("Hook %s does not exist", s)
 
-		c.AbortWithStatusJSON(404, types.Error{Message: &msg})
+			c.AbortWithStatusJSON(404, types.Error{Message: &msg})
 
-		return
+			return
+		}
 	}
 
 	data := []byte(HookResp)
