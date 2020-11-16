@@ -96,9 +96,7 @@ func addDeployment(c *gin.Context) {
 	c.JSON(http.StatusCreated, body)
 }
 
-// updateDeployment has a param :build returns mock JSON for a http PUT.
-//
-// Pass "0" to :build to test receiving a http 404 response
+// updateDeployment returns mock JSON for a http PUT.
 func updateDeployment(c *gin.Context) {
 	data := []byte(DeploymentResp)
 
