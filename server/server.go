@@ -66,6 +66,13 @@ func FakeHandler() http.Handler {
 	e.PUT("/api/v1/repos/:org/:repo/builds/:build/steps/:step/logs", updateStepLog)
 	e.DELETE("/api/v1/repos/:org/:repo/builds/:build/steps/:step/logs", removeStepLog)
 
+	// mock endpoints for pipeline calls
+	e.GET("/api/v1/pipelines/:org/:repo", getPipeline)
+	e.POST("/api/v1/pipelines/:org/:repo/compile", compilePipeline)
+	e.POST("/api/v1/pipelines/:org/:repo/expand", expandPipeline)
+	e.GET("/api/v1/pipelines/:org/:repo/templates", getTemplates)
+	e.POST("/api/v1/pipelines/:org/:repo/validate", validatePipeline)
+
 	// mock endpoints for repo calls
 	e.GET("/api/v1/repos/:org/:repo", getRepo)
 	e.GET("/api/v1/repos", getRepos)
