@@ -100,9 +100,9 @@ func addDeployment(c *gin.Context) {
 //
 // Pass "0" to :build to test receiving a http 404 response
 func updateDeployment(c *gin.Context) {
-	data := []byte(BuildResp)
+	data := []byte(DeploymentResp)
 
-	var body library.Build
+	var body library.Deployment
 	_ = json.Unmarshal(data, &body)
 
 	c.JSON(http.StatusOK, body)
