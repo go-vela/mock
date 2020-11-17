@@ -81,7 +81,7 @@ func getService(c *gin.Context) {
 	if strings.EqualFold(s, "0") {
 		msg := fmt.Sprintf("Service %s does not exist", s)
 
-		c.AbortWithStatusJSON(404, types.Error{Message: &msg})
+		c.AbortWithStatusJSON(http.StatusNotFound, types.Error{Message: &msg})
 
 		return
 	}
@@ -108,14 +108,16 @@ func addService(c *gin.Context) {
 //
 // Pass "0" to :service to test receiving a http 404 response
 func updateService(c *gin.Context) {
-	s := c.Param("service")
+	if !strings.Contains(c.FullPath(), "admin") {
+		s := c.Param("service")
 
-	if strings.EqualFold(s, "0") {
-		msg := fmt.Sprintf("Service %s does not exist", s)
+		if strings.EqualFold(s, "0") {
+			msg := fmt.Sprintf("Service %s does not exist", s)
 
-		c.AbortWithStatusJSON(404, types.Error{Message: &msg})
+			c.AbortWithStatusJSON(http.StatusNotFound, types.Error{Message: &msg})
 
-		return
+			return
+		}
 	}
 
 	data := []byte(ServiceResp)
@@ -135,7 +137,7 @@ func removeService(c *gin.Context) {
 	if strings.EqualFold(s, "0") {
 		msg := fmt.Sprintf("Service %s does not exist", s)
 
-		c.AbortWithStatusJSON(404, types.Error{Message: &msg})
+		c.AbortWithStatusJSON(http.StatusNotFound, types.Error{Message: &msg})
 
 		return
 	}

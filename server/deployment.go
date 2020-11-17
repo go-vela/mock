@@ -73,7 +73,7 @@ func getDeployment(c *gin.Context) {
 	if strings.EqualFold(d, "0") {
 		msg := fmt.Sprintf("Deployment %s does not exist", d)
 
-		c.AbortWithStatusJSON(404, types.Error{Message: &msg})
+		c.AbortWithStatusJSON(http.StatusNotFound, types.Error{Message: &msg})
 
 		return
 	}
@@ -94,4 +94,14 @@ func addDeployment(c *gin.Context) {
 	_ = json.Unmarshal(data, &body)
 
 	c.JSON(http.StatusCreated, body)
+}
+
+// updateDeployment returns mock JSON for a http PUT.
+func updateDeployment(c *gin.Context) {
+	data := []byte(DeploymentResp)
+
+	var body library.Deployment
+	_ = json.Unmarshal(data, &body)
+
+	c.JSON(http.StatusOK, body)
 }
