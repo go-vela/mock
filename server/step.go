@@ -83,7 +83,7 @@ func getSteps(c *gin.Context) {
 
 // getStep has a param :step returns mock JSON for a http GET.
 //
-// Pass "0" to :step to test receiving a http 404 response
+// Pass "0" to :step to test receiving a http 404 response.
 func getStep(c *gin.Context) {
 	s := c.Param("step")
 
@@ -115,7 +115,7 @@ func addStep(c *gin.Context) {
 
 // updateStep has a param :step returns mock JSON for a http PUT.
 //
-// Pass "0" to :step to test receiving a http 404 response
+// Pass "0" to :step to test receiving a http 404 response.
 func updateStep(c *gin.Context) {
 	if !strings.Contains(c.FullPath(), "admin") {
 		s := c.Param("step")
@@ -139,7 +139,7 @@ func updateStep(c *gin.Context) {
 
 // removeStep has a param :step returns mock JSON for a http DELETE.
 //
-// Pass "0" to :step to test receiving a http 404 response
+// Pass "0" to :step to test receiving a http 404 response.
 func removeStep(c *gin.Context) {
 	s := c.Param("step")
 
@@ -151,5 +151,5 @@ func removeStep(c *gin.Context) {
 		return
 	}
 
-	c.JSON(200, fmt.Sprintf("Step %s removed", s))
+	c.JSON(http.StatusOK, fmt.Sprintf("Step %s removed", s))
 }

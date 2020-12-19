@@ -145,14 +145,14 @@ sample:
 
 // getPipeline has a param :repo returns mock YAML for a http GET.
 //
-// Pass "not-found" to :repo to test receiving a http 404 response
+// Pass "not-found" to :repo to test receiving a http 404 response.
 func getPipeline(c *gin.Context) {
 	r := c.Param("repo")
 
 	if strings.Contains(r, "not-found") {
 		msg := fmt.Sprintf("Repo %s does not exist", r)
 
-		c.AbortWithStatusJSON(404, types.Error{Message: &msg})
+		c.AbortWithStatusJSON(http.StatusNotFound, types.Error{Message: &msg})
 
 		return
 	}
@@ -167,14 +167,14 @@ func getPipeline(c *gin.Context) {
 
 // compilePipeline has a param :repo returns mock YAML for a http GET.
 //
-// Pass "not-found" to :repo to test receiving a http 404 response
+// Pass "not-found" to :repo to test receiving a http 404 response.
 func compilePipeline(c *gin.Context) {
 	r := c.Param("repo")
 
 	if strings.Contains(r, "not-found") {
 		msg := fmt.Sprintf("Repo %s does not exist", r)
 
-		c.AbortWithStatusJSON(404, types.Error{Message: &msg})
+		c.AbortWithStatusJSON(http.StatusNotFound, types.Error{Message: &msg})
 
 		return
 	}
@@ -189,14 +189,14 @@ func compilePipeline(c *gin.Context) {
 
 // expandPipeline has a param :repo returns mock YAML for a http GET.
 //
-// Pass "not-found" to :repo to test receiving a http 404 response
+// Pass "not-found" to :repo to test receiving a http 404 response.
 func expandPipeline(c *gin.Context) {
 	r := c.Param("repo")
 
 	if strings.Contains(r, "not-found") {
 		msg := fmt.Sprintf("Repo %s does not exist", r)
 
-		c.AbortWithStatusJSON(404, types.Error{Message: &msg})
+		c.AbortWithStatusJSON(http.StatusNotFound, types.Error{Message: &msg})
 
 		return
 	}
@@ -211,14 +211,14 @@ func expandPipeline(c *gin.Context) {
 
 // getTemplates has a param :repo returns mock YAML for a http GET.
 //
-// Pass "not-found" to :repo to test receiving a http 404 response
+// Pass "not-found" to :repo to test receiving a http 404 response.
 func getTemplates(c *gin.Context) {
 	r := c.Param("repo")
 
 	if strings.Contains(r, "not-found") {
 		msg := fmt.Sprintf("Repo %s does not exist", r)
 
-		c.AbortWithStatusJSON(404, types.Error{Message: &msg})
+		c.AbortWithStatusJSON(http.StatusNotFound, types.Error{Message: &msg})
 
 		return
 	}
@@ -233,14 +233,14 @@ func getTemplates(c *gin.Context) {
 
 // validatePipeline has a param :repo returns mock YAML for a http GET.
 //
-// Pass "not-found" to :repo to test receiving a http 404 response
+// Pass "not-found" to :repo to test receiving a http 404 response.
 func validatePipeline(c *gin.Context) {
 	r := c.Param("repo")
 
 	if strings.Contains(r, "not-found") {
 		msg := fmt.Sprintf("Repo %s does not exist", r)
 
-		c.AbortWithStatusJSON(404, types.Error{Message: &msg})
+		c.AbortWithStatusJSON(http.StatusNotFound, types.Error{Message: &msg})
 
 		return
 	}

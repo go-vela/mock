@@ -49,3 +49,70 @@ cd $HOME/go-vela/mock
 # Add a remote branch pointing to your fork
 git remote add fork https://github.com/your_fork/mock
 ```
+
+### Development
+
+* Navigate to the repository code:
+
+```bash
+# Change into the project directory
+cd $HOME/go-vela/mock
+```
+
+* Write your code
+  * Please be sure to [follow our commit rules](https://chris.beams.io/posts/git-commit/#seven-rules)
+  * Please address linter warnings appropriately. If you are intentionally violating a rule that triggers a linter, please annotate the respective code with `nolint` declarations [[docs](https://golangci-lint.run/usage/false-positives/)]. we are using the following format for `nolint` declarations:
+
+    ```go
+    // nolint:<linter(s)> // <short reason>
+    ```
+  
+    Example:
+
+    ```go
+    // nolint:gocyclo // legacy function is complex, needs simplification
+    func superComplexFunction() error {
+      // ..
+    }
+    ```
+
+    Check the [documentation for more examples](https://golangci-lint.run/usage/false-positives/).
+
+* Ensure your code meets the project standards:
+
+```bash
+# Clean the code with `go`
+go mod tidy
+go fmt ./...
+go vet ./...
+```
+
+* Push to your fork:
+
+```bash
+# Push your code up to your fork
+git push fork master
+```
+
+* Open a pull request!
+  * For the title of the pull request, please use the following format for the title:
+
+    ```text
+    feat(wobble): add hat wobble
+    ^--^^------^  ^------------^
+    |   |         |
+    |   |         +---> Summary in present tense.
+    |   +---> Scope: a noun describing a section of the codebase (optional)
+    +---> Type: chore, docs, feat, fix, refactor, or test.
+    ```
+
+    * feat: adds a new feature (equivalent to a MINOR in Semantic Versioning)
+    * fix: fixes a bug (equivalent to a PATCH in Semantic Versioning)
+    * docs: changes to the documentation
+    * refactor: refactors production code, eg. renaming a variable; doesn't change public API
+    * test: adds missing tests, refactors tests; no production code change
+    * chore: updates something without impacting the user (ex: bump a dependency in package.json or go.mod); no production code change
+
+    If a code change introduces a breaking change, place ! suffix after type, ie. feat(change)!: adds breaking change. correlates with MAJOR in semantic versioning.
+
+Thank you for your contribution!

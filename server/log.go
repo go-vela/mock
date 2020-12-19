@@ -29,7 +29,7 @@ const (
 
 // getServiceLog has a param :service returns mock JSON for a http GET.
 //
-// Pass "0" to :step to test receiving a http 404 response
+// Pass "0" to :step to test receiving a http 404 response.
 func getServiceLog(c *gin.Context) {
 	s := c.Param("service")
 
@@ -61,7 +61,7 @@ func addServiceLog(c *gin.Context) {
 
 // updateServiceLog has a param :service returns mock JSON for a http PUT.
 //
-// Pass "0" to :step to test receiving a http 404 response
+// Pass "0" to :step to test receiving a http 404 response.
 func updateServiceLog(c *gin.Context) {
 	s := c.Param("service")
 
@@ -83,7 +83,7 @@ func updateServiceLog(c *gin.Context) {
 
 // removeServiceLog has a param :service returns mock JSON for a http DELETE.
 //
-// Pass "0" to :step to test receiving a http 404 response
+// Pass "0" to :step to test receiving a http 404 response.
 func removeServiceLog(c *gin.Context) {
 	s := c.Param("service")
 
@@ -100,7 +100,7 @@ func removeServiceLog(c *gin.Context) {
 
 // getStepLog has a param :step returns mock JSON for a http GET.
 //
-// Pass "0" to :step to test receiving a http 404 response
+// Pass "0" to :step to test receiving a http 404 response.
 func getStepLog(c *gin.Context) {
 	s := c.Param("step")
 
@@ -132,7 +132,7 @@ func addStepLog(c *gin.Context) {
 
 // updateStepLog has a param :step returns mock JSON for a http PUT.
 //
-// Pass "0" to :step to test receiving a http 404 response
+// Pass "0" to :step to test receiving a http 404 response.
 func updateStepLog(c *gin.Context) {
 	s := c.Param("step")
 
@@ -154,7 +154,7 @@ func updateStepLog(c *gin.Context) {
 
 // removeStepLog has a param :step returns mock JSON for a http DELETE.
 //
-// Pass "0" to :step to test receiving a http 404 response
+// Pass "0" to :step to test receiving a http 404 response.
 func removeStepLog(c *gin.Context) {
 	s := c.Param("step")
 

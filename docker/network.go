@@ -47,7 +47,7 @@ func (n *NetworkService) NetworkCreate(ctx context.Context, name string, options
 	if strings.Contains(name, "notfound") &&
 		!strings.Contains(name, "ignorenotfound") {
 		return types.NetworkCreateResponse{},
-			errdefs.NotFound(fmt.Errorf("Error: No such network: %s", name))
+			errdefs.NotFound(fmt.Errorf("error: No such network: %s", name))
 	}
 
 	// check if the network is not-found and
@@ -55,7 +55,7 @@ func (n *NetworkService) NetworkCreate(ctx context.Context, name string, options
 	if strings.Contains(name, "not-found") &&
 		!strings.Contains(name, "ignore-not-found") {
 		return types.NetworkCreateResponse{},
-			errdefs.NotFound(fmt.Errorf("Error: No such network: %s", name))
+			errdefs.NotFound(fmt.Errorf("error: No such network: %s", name))
 	}
 
 	// create response object to return
@@ -87,13 +87,13 @@ func (n *NetworkService) NetworkInspect(ctx context.Context, network string, opt
 	// check if the network is notfound
 	if strings.Contains(network, "notfound") {
 		return types.NetworkResource{},
-			errdefs.NotFound(fmt.Errorf("Error: No such network: %s", network))
+			errdefs.NotFound(fmt.Errorf("error: No such network: %s", network))
 	}
 
 	// check if the network is not-found
 	if strings.Contains(network, "not-found") {
 		return types.NetworkResource{},
-			errdefs.NotFound(fmt.Errorf("Error: No such network: %s", network))
+			errdefs.NotFound(fmt.Errorf("error: No such network: %s", network))
 	}
 
 	// create response object to return
