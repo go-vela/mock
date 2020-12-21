@@ -32,21 +32,21 @@ We are always open to new PRs! You can follow the below guide for learning how y
 * Clone this repository to your workstation:
 
 ```bash
-# Clone the project
+# clone the project
 git clone git@github.com:go-vela/mock.git $HOME/go-vela/mock
 ```
 
 * Navigate to the repository code:
 
 ```bash
-# Change into the project directory
+# change into the project directory
 cd $HOME/go-vela/mock
 ```
 
 * Point the original code at your fork:
 
 ```bash
-# Add a remote branch pointing to your fork
+# add a remote branch pointing to your fork
 git remote add fork https://github.com/your_fork/mock
 ```
 
@@ -55,11 +55,11 @@ git remote add fork https://github.com/your_fork/mock
 * Navigate to the repository code:
 
 ```bash
-# Change into the project directory
+# change into the project directory
 cd $HOME/go-vela/mock
 ```
 
-* Write your code
+* Write your code and tests to implement the changes you desire.
   * Please be sure to [follow our commit rules](https://chris.beams.io/posts/git-commit/#seven-rules)
   * Please address linter warnings appropriately. If you are intentionally violating a rule that triggers a linter, please annotate the respective code with `nolint` declarations [[docs](https://golangci-lint.run/usage/false-positives/)]. we are using the following format for `nolint` declarations:
 
@@ -78,19 +78,24 @@ cd $HOME/go-vela/mock
 
     Check the [documentation for more examples](https://golangci-lint.run/usage/false-positives/).
 
-* Ensure your code meets the project standards:
+* Test the repository code (ensures your changes don't break existing functionality):
 
 ```bash
-# Clean the code with `go`
-go mod tidy
-go fmt ./...
-go vet ./...
+# execute the `test` target with `make`
+make test
+```
+
+* Clean the repository code (ensures your code meets the project standards):
+
+```bash
+# execute the `test` target with `make`
+make clean
 ```
 
 * Push to your fork:
 
 ```bash
-# Push your code up to your fork
+# push your code up to your fork
 git push fork master
 ```
 

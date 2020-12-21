@@ -90,7 +90,8 @@ func (i *ImageService) ImageInspectWithRaw(ctx context.Context, image string) (t
 		return types.ImageInspect{},
 			nil,
 			errdefs.NotFound(
-				fmt.Errorf("error response from daemon: manifest for %s not found: manifest unknown", image),
+				// nolint:golint,stylecheck // messsage is capitalized to match Docker messages
+				fmt.Errorf("Error response from daemon: manifest for %s not found: manifest unknown", image),
 			)
 	}
 
@@ -164,7 +165,8 @@ func (i *ImageService) ImagePull(ctx context.Context, image string, options type
 		!strings.Contains(image, "ignorenotfound") {
 		return nil,
 			errdefs.NotFound(
-				fmt.Errorf("error response from daemon: manifest for %s not found: manifest unknown", image),
+				// nolint:golint,stylecheck // messsage is capitalized to match Docker messages
+				fmt.Errorf("Error response from daemon: manifest for %s not found: manifest unknown", image),
 			)
 	}
 
@@ -174,7 +176,8 @@ func (i *ImageService) ImagePull(ctx context.Context, image string, options type
 		!strings.Contains(image, "ignore-not-found") {
 		return nil,
 			errdefs.NotFound(
-				fmt.Errorf("error response from daemon: manifest for %s not found: manifest unknown", image),
+				// nolint:golint,stylecheck // messsage is capitalized to match Docker messages
+				fmt.Errorf("Error response from daemon: manifest for %s not found: manifest unknown", image),
 			)
 	}
 

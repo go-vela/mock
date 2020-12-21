@@ -39,7 +39,8 @@ func (v *VolumeService) VolumeCreate(ctx context.Context, options volume.VolumeC
 	if strings.Contains(options.Name, "notfound") &&
 		!strings.Contains(options.Name, "ignorenotfound") {
 		return types.Volume{},
-			errdefs.NotFound(fmt.Errorf("error: No such volume: %s", options.Name))
+			// nolint:golint,stylecheck // messsage is capitalized to match Docker messages
+			errdefs.NotFound(fmt.Errorf("Error: No such volume: %s", options.Name))
 	}
 
 	// check if the volume is not-found and
@@ -47,7 +48,8 @@ func (v *VolumeService) VolumeCreate(ctx context.Context, options volume.VolumeC
 	if strings.Contains(options.Name, "not-found") &&
 		!strings.Contains(options.Name, "ignore-not-found") {
 		return types.Volume{},
-			errdefs.NotFound(fmt.Errorf("error: No such volume: %s", options.Name))
+			// nolint:golint,stylecheck // messsage is capitalized to match Docker messages
+			errdefs.NotFound(fmt.Errorf("Error: No such volume: %s", options.Name))
 	}
 
 	// create response object to return
@@ -77,13 +79,15 @@ func (v *VolumeService) VolumeInspect(ctx context.Context, volumeID string) (typ
 	// check if the volume is notfound
 	if strings.Contains(volumeID, "notfound") {
 		return types.Volume{},
-			errdefs.NotFound(fmt.Errorf("error: No such volume: %s", volumeID))
+			// nolint:golint,stylecheck // messsage is capitalized to match Docker messages
+			errdefs.NotFound(fmt.Errorf("Error: No such volume: %s", volumeID))
 	}
 
 	// check if the volume is not-found
 	if strings.Contains(volumeID, "not-found") {
 		return types.Volume{},
-			errdefs.NotFound(fmt.Errorf("error: No such volume: %s", volumeID))
+			// nolint:golint,stylecheck // messsage is capitalized to match Docker messages
+			errdefs.NotFound(fmt.Errorf("Error: No such volume: %s", volumeID))
 	}
 
 	// create response object to return
@@ -112,13 +116,15 @@ func (v *VolumeService) VolumeInspectWithRaw(ctx context.Context, volumeID strin
 	// check if the volume is notfound
 	if strings.Contains(volumeID, "notfound") {
 		return types.Volume{}, nil,
-			errdefs.NotFound(fmt.Errorf("error: No such volume: %s", volumeID))
+			// nolint:golint,stylecheck // messsage is capitalized to match Docker messages
+			errdefs.NotFound(fmt.Errorf("Error: No such volume: %s", volumeID))
 	}
 
 	// check if the volume is not-found
 	if strings.Contains(volumeID, "not-found") {
 		return types.Volume{}, nil,
-			errdefs.NotFound(fmt.Errorf("error: No such volume: %s", volumeID))
+			// nolint:golint,stylecheck // messsage is capitalized to match Docker messages
+			errdefs.NotFound(fmt.Errorf("Error: No such volume: %s", volumeID))
 	}
 
 	// create response object to return
