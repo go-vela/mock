@@ -12,6 +12,7 @@ import (
 
 // FakeHandler returns an http.Handler that is capable of handling
 // Vela API requests and returning mock responses.
+// nolint:funlen // number of endpoints is causing linter warning
 func FakeHandler() http.Handler {
 	gin.SetMode(gin.TestMode)
 

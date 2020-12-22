@@ -92,14 +92,14 @@ func getRepos(c *gin.Context) {
 
 // getRepo has a param :repo returns mock JSON for a http GET.
 //
-// Pass "not-found" to :repo to test receiving a http 404 response
+// Pass "not-found" to :repo to test receiving a http 404 response.
 func getRepo(c *gin.Context) {
 	r := c.Param("repo")
 
 	if strings.Contains(r, "not-found") {
 		msg := fmt.Sprintf("Repo %s does not exist", r)
 
-		c.AbortWithStatusJSON(404, types.Error{Message: &msg})
+		c.AbortWithStatusJSON(http.StatusNotFound, types.Error{Message: &msg})
 
 		return
 	}
@@ -124,7 +124,7 @@ func addRepo(c *gin.Context) {
 
 // updateRepo has a param :repo returns mock JSON for a http PUT.
 //
-// Pass "not-found" to :repo to test receiving a http 404 response
+// Pass "not-found" to :repo to test receiving a http 404 response.
 func updateRepo(c *gin.Context) {
 	if !strings.Contains(c.FullPath(), "admin") {
 		r := c.Param("repo")
@@ -148,7 +148,7 @@ func updateRepo(c *gin.Context) {
 
 // removeRepo has a param :repo returns mock JSON for a http DELETE.
 //
-// Pass "not-found" to :repo to test receiving a http 404 response
+// Pass "not-found" to :repo to test receiving a http 404 response.
 func removeRepo(c *gin.Context) {
 	r := c.Param("repo")
 
@@ -165,7 +165,7 @@ func removeRepo(c *gin.Context) {
 
 // repairRepo has a param :repo returns mock JSON for a http PATCH.
 //
-// Pass "not-found" to :repo to test receiving a http 404 response
+// Pass "not-found" to :repo to test receiving a http 404 response.
 func repairRepo(c *gin.Context) {
 	r := c.Param("repo")
 
@@ -182,7 +182,7 @@ func repairRepo(c *gin.Context) {
 
 // chownRepo has a param :repo returns mock JSON for a http PATCH.
 //
-// Pass "not-found" to :repo to test receiving a http 404 response
+// Pass "not-found" to :repo to test receiving a http 404 response.
 func chownRepo(c *gin.Context) {
 	r := c.Param("repo")
 

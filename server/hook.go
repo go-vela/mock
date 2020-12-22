@@ -77,7 +77,7 @@ func getHooks(c *gin.Context) {
 
 // getHook has a param :hook returns mock JSON for a http GET.
 //
-// Pass "0" to :hook to test receiving a http 404 response
+// Pass "0" to :hook to test receiving a http 404 response.
 func getHook(c *gin.Context) {
 	s := c.Param("hook")
 
@@ -109,7 +109,7 @@ func addHook(c *gin.Context) {
 
 // updateHook has a param :hook returns mock JSON for a http PUT.
 //
-// Pass "0" to :hook to test receiving a http 404 response
+// Pass "0" to :hook to test receiving a http 404 response.
 func updateHook(c *gin.Context) {
 	if !strings.Contains(c.FullPath(), "admin") {
 		s := c.Param("hook")
@@ -133,7 +133,7 @@ func updateHook(c *gin.Context) {
 
 // removeHook has a param :hook returns mock JSON for a http DELETE.
 //
-// Pass "0" to :hook to test receiving a http 404 response
+// Pass "0" to :hook to test receiving a http 404 response.
 func removeHook(c *gin.Context) {
 	s := c.Param("hook")
 

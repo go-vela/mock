@@ -160,14 +160,14 @@ func getBuild(c *gin.Context) {
 
 // getLogs has a param :build returns mock JSON for a http GET.
 //
-// Pass "0" to :build to test receiving a http 404 response
+// Pass "0" to :build to test receiving a http 404 response.
 func getLogs(c *gin.Context) {
 	b := c.Param("build")
 
 	if strings.EqualFold(b, "0") {
 		msg := fmt.Sprintf("Build %s does not exist", b)
 
-		c.AbortWithStatusJSON(404, types.Error{Message: &msg})
+		c.AbortWithStatusJSON(http.StatusNotFound, types.Error{Message: &msg})
 
 		return
 	}
@@ -216,7 +216,7 @@ func updateBuild(c *gin.Context) {
 
 // removeBuild has a param :build returns mock JSON for a http DELETE.
 //
-// Pass "0" to :build to test receiving a http 404 response
+// Pass "0" to :build to test receiving a http 404 response.
 func removeBuild(c *gin.Context) {
 	b := c.Param("build")
 
@@ -233,7 +233,7 @@ func removeBuild(c *gin.Context) {
 
 // restartBuild has a param :build returns mock JSON for a http POST.
 //
-// Pass "0" to :build to test receiving a http 404 response
+// Pass "0" to :build to test receiving a http 404 response.
 func restartBuild(c *gin.Context) {
 	b := c.Param("build")
 

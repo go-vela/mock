@@ -15,6 +15,7 @@ import (
 	"github.com/go-vela/types/library"
 )
 
+// nolint:gosec // these are mock responses
 const (
 	// SecretResp represents a JSON return for a single secret.
 	SecretResp = `{
@@ -95,14 +96,14 @@ func getSecrets(c *gin.Context) {
 
 // getSecret has a param :name returns mock JSON for a http GET.
 //
-// Pass "not-found" to :name to test receiving a http 404 response
+// Pass "not-found" to :name to test receiving a http 404 response.
 func getSecret(c *gin.Context) {
 	n := c.Param("name")
 
 	if strings.Contains(n, "not-found") {
 		msg := fmt.Sprintf("Secret %s does not exist", n)
 
-		c.AbortWithStatusJSON(404, types.Error{Message: &msg})
+		c.AbortWithStatusJSON(http.StatusNotFound, types.Error{Message: &msg})
 
 		return
 	}
@@ -127,7 +128,7 @@ func addSecret(c *gin.Context) {
 
 // updateSecret has a param :name returns mock JSON for a http PUT.
 //
-// Pass "not-found" to :name to test receiving a http 404 response
+// Pass "not-found" to :name to test receiving a http 404 response.
 func updateSecret(c *gin.Context) {
 	if !strings.Contains(c.FullPath(), "admin") {
 		n := c.Param("name")
@@ -151,7 +152,7 @@ func updateSecret(c *gin.Context) {
 
 // removeSecret has a param :name returns mock JSON for a http DELETE.
 //
-// Pass "not-found" to :name to test receiving a http 404 response
+// Pass "not-found" to :name to test receiving a http 404 response.
 func removeSecret(c *gin.Context) {
 	n := c.Param("name")
 

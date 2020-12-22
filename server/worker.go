@@ -102,7 +102,7 @@ func addWorker(c *gin.Context) {
 
 // updateWorker has a param :worker returns mock JSON for a http PUT.
 //
-// Pass "0" to :worker to test receiving a http 404 response
+// Pass "0" to :worker to test receiving a http 404 response.
 func updateWorker(c *gin.Context) {
 	w := c.Param("worker")
 
@@ -124,14 +124,14 @@ func updateWorker(c *gin.Context) {
 
 // removeWorker has a param :worker returns mock JSON for a http DELETE.
 //
-// Pass "0" to :worker to test receiving a http 404 response
+// Pass "0" to :worker to test receiving a http 404 response.
 func removeWorker(c *gin.Context) {
 	w := c.Param("worker")
 
 	if strings.EqualFold(w, "0") {
 		msg := fmt.Sprintf("Worker %s does not exist", w)
 
-		c.AbortWithStatusJSON(404, types.Error{Message: &msg})
+		c.AbortWithStatusJSON(http.StatusNotFound, types.Error{Message: &msg})
 
 		return
 	}

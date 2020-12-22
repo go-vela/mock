@@ -74,7 +74,7 @@ func getServices(c *gin.Context) {
 
 // getService has a param :service returns mock JSON for a http GET.
 //
-// Pass "0" to :service to test receiving a http 404 response
+// Pass "0" to :service to test receiving a http 404 response.
 func getService(c *gin.Context) {
 	s := c.Param("service")
 
@@ -106,7 +106,7 @@ func addService(c *gin.Context) {
 
 // updateService has a param :service returns mock JSON for a http PUT.
 //
-// Pass "0" to :service to test receiving a http 404 response
+// Pass "0" to :service to test receiving a http 404 response.
 func updateService(c *gin.Context) {
 	if !strings.Contains(c.FullPath(), "admin") {
 		s := c.Param("service")
@@ -130,7 +130,7 @@ func updateService(c *gin.Context) {
 
 // removeService has a param :service returns mock JSON for a http DELETE.
 //
-// Pass "0" to :service to test receiving a http 404 response
+// Pass "0" to :service to test receiving a http 404 response.
 func removeService(c *gin.Context) {
 	s := c.Param("service")
 
@@ -142,5 +142,5 @@ func removeService(c *gin.Context) {
 		return
 	}
 
-	c.JSON(200, fmt.Sprintf("Service %s removed", s))
+	c.JSON(http.StatusOK, fmt.Sprintf("Service %s removed", s))
 }

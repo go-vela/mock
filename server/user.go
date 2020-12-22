@@ -59,7 +59,7 @@ func getUsers(c *gin.Context) {
 
 // getUser has a param :user returns mock JSON for a http GET.
 //
-// Pass "not-found" to :user to test receiving a http 404 response
+// Pass "not-found" to :user to test receiving a http 404 response.
 func getUser(c *gin.Context) {
 	u := c.Param("user")
 
@@ -91,7 +91,7 @@ func addUser(c *gin.Context) {
 
 // updateUser has a param :user returns mock JSON for a http PUT.
 //
-// Pass "not-found" to :user to test receiving a http 404 response
+// Pass "not-found" to :user to test receiving a http 404 response.
 func updateUser(c *gin.Context) {
 	if !strings.Contains(c.FullPath(), "admin") {
 		u := c.Param("user")
@@ -115,7 +115,7 @@ func updateUser(c *gin.Context) {
 
 // removeUser has a param :user returns mock JSON for a http DELETE.
 //
-// Pass "not-found" to :user to test receiving a http 404 response
+// Pass "not-found" to :user to test receiving a http 404 response.
 func removeUser(c *gin.Context) {
 	u := c.Param("user")
 
