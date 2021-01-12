@@ -39,7 +39,7 @@ func FakeHandler() http.Handler {
 	// mock endpoints for build calls
 	e.GET("/api/v1/repos/:org/:repo/builds/:build", getBuild)
 	e.POST("/api/v1/repos/:org/:repo/builds/:build", restartBuild)
-	e.POST("/api/v1/repos/:org/:repo/builds/:build/cancel", cancelBuild)
+	e.DELETE("/api/v1/repos/:org/:repo/builds/:build/cancel", cancelBuild)
 	e.GET("/api/v1/repos/:org/:repo/builds/:build/logs", getLogs)
 	e.GET("/api/v1/repos/:org/:repo/builds", getBuilds)
 	e.POST("/api/v1/repos/:org/:repo/builds", addBuild)
