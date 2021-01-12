@@ -126,6 +126,8 @@ const (
     "data": "SGVsbG8sIFdvcmxkIQ=="
   }
 ]`
+	// BuildCanceledResp represents a JSON return for a canceled build.
+	BuildCanceledResp = `"canceled build github/octocat/1"`
 )
 
 // getBuilds returns mock JSON for a http GET.
@@ -251,4 +253,21 @@ func restartBuild(c *gin.Context) {
 	_ = json.Unmarshal(data, &body)
 
 	c.JSON(http.StatusCreated, body)
+}
+
+// cancelBuild has a param :build returns mock JSON for a http DELETE.
+//
+// Pass "0" to :build to test receiving a http 404 response.
+func cancelBuild(c *gin.Context) {
+	b := c.Param("build")
+
+	if strings.EqualFold(b, "0") {
+		msg := fmt.Sprintf("Build %s does not exist", b)
+
+		c.AbortWithStatusJSON(http.StatusNotFound, types.Error{Message: &msg})
+
+		return
+	}
+
+	c.JSON(http.StatusOK, fmt.Sprintf("Worker %s removed", BuildCanceledResp))
 }
