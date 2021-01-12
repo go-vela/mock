@@ -269,5 +269,5 @@ func cancelBuild(c *gin.Context) {
 		return
 	}
 
-	c.JSON(http.StatusOK, fmt.Sprintf("Worker %s removed", BuildCanceledResp))
+	c.JSON(http.StatusOK, BuildCanceledResp)
 }
