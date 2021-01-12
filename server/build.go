@@ -126,7 +126,7 @@ const (
     "data": "SGVsbG8sIFdvcmxkIQ=="
   }
 ]`
-	// BuildCanceledResp represents a JSON return for a canceled build
+	// BuildCanceledResp represents a JSON return for a canceled build.
 	BuildCanceledResp = `"canceled build github/octocat/1"`
 )
 
