@@ -119,5 +119,9 @@ func FakeHandler() http.Handler {
 	e.PUT("/api/v1/workers/:worker", updateWorker)
 	e.DELETE("/api/v1/workers/:worker", removeWorker)
 
+	// mock endpoints for authentication calls
+	e.GET("/token-refresh", getTokenRefresh)
+	e.GET("/authenticate", getAuthenticate)
+
 	return e
 }
