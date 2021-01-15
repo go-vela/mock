@@ -15,7 +15,8 @@ import (
 )
 
 const (
-	// TokenRefreshResp represents a JSON return for a token refresh
+	// TokenRefreshResp represents a JSON return for a token refresh.
+	// nolint:gosec // not a hardcoded credential
 	TokenRefreshResp = `{
   "token": "header.payload.signature"
 }`
