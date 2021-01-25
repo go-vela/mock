@@ -55,3 +55,21 @@ func getAuthenticate(c *gin.Context) {
 
 	c.JSON(http.StatusOK, body)
 }
+
+// getAuthenticateFromToken returns mock response for a http POST.
+//
+// Don't pass "Token" in header to receive an error message.
+func getAuthenticateFromToken(c *gin.Context) {
+	data := []byte(TokenRefreshResp)
+	err := "error"
+
+	token := c.Request.Header.Get("Token")
+	if len(token) == 0 {
+		c.AbortWithStatusJSON(http.StatusUnauthorized, types.Error{Message: &err})
+	}
+
+	var body library.Login
+	_ = json.Unmarshal(data, &body)
+
+	c.JSON(http.StatusOK, body)
+}
