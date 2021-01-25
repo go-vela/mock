@@ -122,6 +122,7 @@ func FakeHandler() http.Handler {
 	// mock endpoints for authentication calls
 	e.GET("/token-refresh", getTokenRefresh)
 	e.GET("/authenticate", getAuthenticate)
+	e.POST("/authenticate/token", getAuthenticateFromToken)
 
 	return e
 }
