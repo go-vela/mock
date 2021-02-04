@@ -126,8 +126,6 @@ const (
     "data": "SGVsbG8sIFdvcmxkIQ=="
   }
 ]`
-	// BuildCanceledResp represents a JSON return for a canceled build.
-	BuildCanceledResp = `"canceled build github/octocat/1"`
 )
 
 // getBuilds returns mock JSON for a http GET.
@@ -269,5 +267,5 @@ func cancelBuild(c *gin.Context) {
 		return
 	}
 
-	c.JSON(http.StatusOK, BuildCanceledResp)
+	c.JSON(http.StatusOK, BuildResp)
 }
