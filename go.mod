@@ -11,8 +11,8 @@ require (
 	github.com/docker/go-connections v0.4.0 // indirect
 	github.com/docker/go-units v0.4.0 // indirect
 	github.com/gin-gonic/gin v1.6.3
-	github.com/go-vela/types v0.7.1
-	github.com/goccy/go-yaml v1.8.8 // indirect
+	github.com/go-playground/validator/v10 v10.4.1 // indirect
+	github.com/go-vela/types v0.7.2
 	github.com/gogo/protobuf v1.3.1 // indirect
 	github.com/golang/protobuf v1.4.2 // indirect
 	github.com/gorilla/mux v1.7.4 // indirect
@@ -24,14 +24,17 @@ require (
 	github.com/opencontainers/image-spec v1.0.1 // indirect
 	github.com/pkg/errors v0.9.1 // indirect
 	github.com/sirupsen/logrus v1.7.0 // indirect
+	github.com/stretchr/testify v1.6.1 // indirect
 	github.com/ugorji/go v1.1.11 // indirect
 	golang.org/x/crypto v0.0.0-20201012173705-84dcc777aaee // indirect
 	golang.org/x/net v0.0.0-20201010224723-4f7140c49acb // indirect
 	golang.org/x/sys v0.0.0-20210124154548-22da62e12c0c // indirect
 	golang.org/x/time v0.0.0-20191024005414-555d28b269f0 // indirect
+	golang.org/x/xerrors v0.0.0-20200804184101-5ec99f83aff1 // indirect
 	google.golang.org/genproto v0.0.0-20201012135029-0c95dc0d88e8 // indirect
 	google.golang.org/grpc v1.33.0 // indirect
 	google.golang.org/protobuf v1.25.0 // indirect
 	gopkg.in/yaml.v2 v2.4.0 // indirect
+	gopkg.in/yaml.v3 v3.0.0-20200615113413-eeeca48fe776 // indirect
 	gotest.tools v2.2.0+incompatible // indirect
 )
