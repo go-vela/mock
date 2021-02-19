@@ -12,7 +12,7 @@ require (
 	github.com/docker/go-units v0.4.0 // indirect
 	github.com/gin-gonic/gin v1.6.3
 	github.com/go-playground/validator/v10 v10.4.1 // indirect
-	github.com/go-vela/types v0.7.2
+	github.com/go-vela/types v0.7.3
 	github.com/gogo/protobuf v1.3.1 // indirect
 	github.com/golang/protobuf v1.4.2 // indirect
 	github.com/gorilla/mux v1.7.4 // indirect
@@ -23,7 +23,6 @@ require (
 	github.com/opencontainers/go-digest v1.0.0 // indirect
 	github.com/opencontainers/image-spec v1.0.1 // indirect
 	github.com/pkg/errors v0.9.1 // indirect
-	github.com/sirupsen/logrus v1.7.0 // indirect
 	github.com/stretchr/testify v1.6.1 // indirect
 	github.com/ugorji/go v1.1.11 // indirect
 	golang.org/x/crypto v0.0.0-20201012173705-84dcc777aaee // indirect
