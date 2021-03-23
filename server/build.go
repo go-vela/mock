@@ -140,7 +140,7 @@ const (
     "created": 1616467142,
     "number": 7,
     "full_name": "github/octocat"
-  },
+  }
 ]`
 )
 
