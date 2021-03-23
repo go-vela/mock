@@ -302,7 +302,7 @@ func buildQueue(c *gin.Context) {
 		return
 	}
 
-	data := []byte(BuildsResp)
+	data := []byte(BuildQueueResp)
 
 	var body []database.BuildQueue
 	_ = json.Unmarshal(data, &body)
