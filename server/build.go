@@ -9,7 +9,6 @@ import (
 	"fmt"
 	"net/http"
 	"strings"
-	"time"
 
 	"github.com/gin-gonic/gin"
 	"github.com/go-vela/sdk-go/vela"
@@ -291,19 +290,19 @@ func buildQueue(c *gin.Context) {
 	data := []database.BuildQueue{
 		{
 			Status:   vela.String("running"),
-			Created:  vela.Int64(time.Now().UTC().Add(-5 * time.Minute).Unix()),
+			Created:  vela.Int64(1563475419),
 			Number:   Int32(5),
 			FullName: vela.String("foo/bar"),
 		},
 		{
 			Status:   vela.String("running"),
-			Created:  vela.Int64(time.Now().UTC().Add(-4 * time.Minute).Unix()),
+			Created:  vela.Int64(1563475419),
 			Number:   Int32(6),
 			FullName: vela.String("foo/bar"),
 		},
 		{
 			Status:   vela.String("pending"),
-			Created:  vela.Int64(time.Now().UTC().Add(-3 * time.Minute).Unix()),
+			Created:  vela.Int64(1563475419),
 			Number:   Int32(7),
 			FullName: vela.String("foo/bar"),
 		},
