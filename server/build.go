@@ -11,8 +11,6 @@ import (
 	"strings"
 
 	"github.com/gin-gonic/gin"
-	"github.com/go-vela/sdk-go/vela"
-	"github.com/go-vela/server/database"
 	"github.com/go-vela/types"
 	"github.com/go-vela/types/library"
 )
@@ -127,6 +125,22 @@ const (
     "repo_id": 1,
     "data": "SGVsbG8sIFdvcmxkIQ=="
   }
+]`
+
+	// BuildQueueResp represents a JSON return for build queue.
+	BuildQueueResp = `[
+  {
+    "status": "running",
+    "created": 1616467142,
+    "number": 6,
+    "full_name": "github/octocat"
+  },
+  {
+    "status": "pending",
+    "created": 1616467142,
+    "number": 7,
+    "full_name": "github/octocat"
+  },
 ]`
 )
 
@@ -287,26 +301,10 @@ func buildQueue(c *gin.Context) {
 		return
 	}
 
-	data := []database.BuildQueue{
-		{
-			Status:   vela.String("running"),
-			Created:  vela.Int64(1563475419),
-			Number:   Int32(5),
-			FullName: vela.String("foo/bar"),
-		},
-		{
-			Status:   vela.String("running"),
-			Created:  vela.Int64(1563475419),
-			Number:   Int32(6),
-			FullName: vela.String("foo/bar"),
-		},
-		{
-			Status:   vela.String("pending"),
-			Created:  vela.Int64(1563475419),
-			Number:   Int32(7),
-			FullName: vela.String("foo/bar"),
-		},
-	}
+	data := []byte(BuildsResp)
 
-	c.JSON(http.StatusOK, data)
+	var body []library.Build
+	_ = json.Unmarshal(data, &body)
+
+	c.JSON(http.StatusOK, body)
 }
