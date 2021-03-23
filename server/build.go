@@ -9,8 +9,11 @@ import (
 	"fmt"
 	"net/http"
 	"strings"
+	"time"
 
 	"github.com/gin-gonic/gin"
+	"github.com/go-vela/sdk-go/vela"
+	"github.com/go-vela/server/database"
 	"github.com/go-vela/types"
 	"github.com/go-vela/types/library"
 )
@@ -268,4 +271,43 @@ func cancelBuild(c *gin.Context) {
 	}
 
 	c.JSON(http.StatusOK, BuildResp)
+}
+
+// Int32 converts int32 to *int32
+func Int32(v int32) *int32 { return &v }
+
+// buildQueue has a param :after returns mock JSON for a http GET.
+//
+// Pass "0" to :after to test receiving a http 200 response with no builds.
+func buildQueue(c *gin.Context) {
+	b := c.Param("after")
+
+	if strings.EqualFold(b, "0") {
+		c.AbortWithStatusJSON(http.StatusOK, []string{})
+
+		return
+	}
+
+	data := []database.BuildQueue{
+		{
+			Status:   vela.String("running"),
+			Created:  vela.Int64(time.Now().UTC().Add(-5 * time.Minute).Unix()),
+			Number:   Int32(5),
+			FullName: vela.String("foo/bar"),
+		},
+		{
+			Status:   vela.String("running"),
+			Created:  vela.Int64(time.Now().UTC().Add(-4 * time.Minute).Unix()),
+			Number:   Int32(6),
+			FullName: vela.String("foo/bar"),
+		},
+		{
+			Status:   vela.String("pending"),
+			Created:  vela.Int64(time.Now().UTC().Add(-3 * time.Minute).Unix()),
+			Number:   Int32(7),
+			FullName: vela.String("foo/bar"),
+		},
+	}
+
+	c.JSON(http.StatusOK, data)
 }
