@@ -11,6 +11,7 @@ import (
 	"strings"
 
 	"github.com/gin-gonic/gin"
+	"github.com/go-vela/server/database"
 	"github.com/go-vela/types"
 	"github.com/go-vela/types/library"
 )
@@ -124,6 +125,22 @@ const (
     "build_id": 1,
     "repo_id": 1,
     "data": "SGVsbG8sIFdvcmxkIQ=="
+  }
+]`
+
+	// BuildQueueResp represents a JSON return for build queue.
+	BuildQueueResp = `[
+  {
+    "status": "running",
+    "created": 1616467142,
+    "number": 6,
+    "full_name": "github/octocat"
+  },
+  {
+    "status": "pending",
+    "created": 1616467142,
+    "number": 7,
+    "full_name": "github/octocat"
   }
 ]`
 )
@@ -268,4 +285,24 @@ func cancelBuild(c *gin.Context) {
 	}
 
 	c.JSON(http.StatusOK, BuildResp)
+}
+
+// buildQueue has a param :after returns mock JSON for a http GET.
+//
+// Pass "0" to :after to test receiving a http 200 response with no builds.
+func buildQueue(c *gin.Context) {
+	b := c.Param("after")
+
+	if strings.EqualFold(b, "0") {
+		c.AbortWithStatusJSON(http.StatusOK, []string{})
+
+		return
+	}
+
+	data := []byte(BuildQueueResp)
+
+	var body []database.BuildQueue
+	_ = json.Unmarshal(data, &body)
+
+	c.JSON(http.StatusOK, body)
 }

@@ -21,6 +21,7 @@ func FakeHandler() http.Handler {
 	// mock endpoints for admin calls
 	e.GET("/api/v1/admin/builds", getBuilds)
 	e.PUT("/api/v1/admin/build", updateBuild)
+	e.GET("/api/v1/admin/builds/queue", buildQueue)
 	e.GET("/api/v1/admin/deployments", getDeployments)
 	e.PUT("/api/v1/admin/deployment", updateDeployment)
 	e.GET("/api/v1/admin/hooks", getHooks)
