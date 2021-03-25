@@ -287,9 +287,6 @@ func cancelBuild(c *gin.Context) {
 	c.JSON(http.StatusOK, BuildResp)
 }
 
-// Int32 converts int32 to *int32
-func Int32(v int32) *int32 { return &v }
-
 // buildQueue has a param :after returns mock JSON for a http GET.
 //
 // Pass "0" to :after to test receiving a http 200 response with no builds.
