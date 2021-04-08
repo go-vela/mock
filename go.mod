@@ -10,7 +10,7 @@ require (
 	github.com/docker/docker v0.7.3-0.20190327010347-be7ac8be2ae0
 	github.com/docker/go-connections v0.4.0 // indirect
 	github.com/docker/go-units v0.4.0 // indirect
-	github.com/gin-gonic/gin v1.6.3
+	github.com/gin-gonic/gin v1.7.1
 	github.com/go-vela/server v0.7.5-0.20210323124812-0da2c57a87ff
 	github.com/go-vela/types v0.7.4
 	github.com/gorilla/mux v1.7.4 // indirect
