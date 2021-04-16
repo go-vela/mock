@@ -11,7 +11,7 @@ require (
 	github.com/docker/go-connections v0.4.0 // indirect
 	github.com/docker/go-units v0.4.0 // indirect
 	github.com/gin-gonic/gin v1.7.1
-	github.com/go-vela/server v0.7.5-0.20210323124812-0da2c57a87ff
+	github.com/go-vela/server v0.7.5
 	github.com/go-vela/types v0.7.4
 	github.com/gorilla/mux v1.7.4 // indirect
 	github.com/moby/term v0.0.0-20201216013528-df9cb8a40635 // indirect
