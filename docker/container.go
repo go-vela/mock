@@ -23,6 +23,7 @@ import (
 	"github.com/docker/docker/errdefs"
 	"github.com/docker/docker/pkg/stdcopy"
 	"github.com/docker/docker/pkg/stringid"
+	v1 "github.com/opencontainers/image-spec/specs-go/v1"
 )
 
 // ContainerService implements all the container
@@ -50,7 +51,7 @@ func (c *ContainerService) ContainerCommit(ctx context.Context, ctn string, opti
 // a mocked call to create a Docker container.
 //
 // https://pkg.go.dev/github.com/docker/docker/client?tab=doc#Client.ContainerCreate
-func (c *ContainerService) ContainerCreate(ctx context.Context, config *container.Config, hostConfig *container.HostConfig, networkingConfig *network.NetworkingConfig, ctn string) (container.ContainerCreateCreatedBody, error) {
+func (c *ContainerService) ContainerCreate(ctx context.Context, config *container.Config, hostConfig *container.HostConfig, networkingConfig *network.NetworkingConfig, p *v1.Platform, ctn string) (container.ContainerCreateCreatedBody, error) {
 	// verify a container was provided
 	if len(ctn) == 0 {
 		return container.ContainerCreateCreatedBody{},
@@ -495,6 +496,14 @@ func (c *ContainerService) ContainerWait(ctx context.Context, ctn string, condit
 // https://pkg.go.dev/github.com/docker/docker/client?tab=doc#Client.ContainersPrune
 func (c *ContainerService) ContainersPrune(ctx context.Context, pruneFilters filters.Args) (types.ContainersPruneReport, error) {
 	return types.ContainersPruneReport{}, nil
+}
+
+// ContainerStatsOneShot is a helper function to simulate
+// a mocked call to return near realtime stats for a given container.
+//
+// https://pkg.go.dev/github.com/docker/docker/client?tab=doc#Client.CopyFromContainer
+func (c *ContainerService) ContainerStatsOneShot(ctx context.Context, containerID string) (types.ContainerStats, error) {
+	return types.ContainerStats{}, nil
 }
 
 // CopyFromContainer is a helper function to simulate
