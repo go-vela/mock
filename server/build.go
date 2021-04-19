@@ -11,7 +11,6 @@ import (
 	"strings"
 
 	"github.com/gin-gonic/gin"
-	"github.com/go-vela/server/database"
 	"github.com/go-vela/types"
 	"github.com/go-vela/types/library"
 )
@@ -301,7 +300,7 @@ func buildQueue(c *gin.Context) {
 
 	data := []byte(BuildQueueResp)
 
-	var body []database.BuildQueue
+	var body []library.BuildQueue
 	_ = json.Unmarshal(data, &body)
 
 	c.JSON(http.StatusOK, body)
