@@ -11,7 +11,7 @@ require (
 	github.com/docker/go-connections v0.4.0 // indirect
 	github.com/docker/go-units v0.4.0 // indirect
 	github.com/gin-gonic/gin v1.7.2
-	github.com/go-vela/types v0.7.5-0.20210419140302-437df36fc4f4
+	github.com/go-vela/types v0.8.0-rc1
 	github.com/gogo/protobuf v1.3.1 // indirect
 	github.com/golang/protobuf v1.4.3 // indirect
 	github.com/google/go-cmp v0.5.5 // indirect
@@ -26,9 +26,6 @@ require (
 	github.com/stretchr/testify v1.6.1 // indirect
 	github.com/ugorji/go v1.1.11 // indirect
 	golang.org/x/crypto v0.0.0-20201221181555-eec23a3978ad // indirect
-	golang.org/x/net v0.0.0-20201202161906-c7110b5ffcbb // indirect
-	golang.org/x/sys v0.0.0-20210309074719-68d13333faf2 // indirect
-	golang.org/x/text v0.3.4 // indirect
 	golang.org/x/time v0.0.0-20200630173020-3af7569d3a1e // indirect
 	golang.org/x/xerrors v0.0.0-20200804184101-5ec99f83aff1 // indirect
 	google.golang.org/genproto v0.0.0-20201012135029-0c95dc0d88e8 // indirect
