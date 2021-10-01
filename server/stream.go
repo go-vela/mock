@@ -12,12 +12,10 @@ import (
 
 // postServiceStream returns a nock response for an http POST.
 func postServiceStream(c *gin.Context) {
-
 	c.JSON(http.StatusNoContent, nil)
 }
 
 // postStepStream returns a nock response for an http POST.
 func postStepStream(c *gin.Context) {
-
 	c.JSON(http.StatusNoContent, nil)
 }
